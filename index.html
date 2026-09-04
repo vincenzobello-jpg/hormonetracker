@@ -2,51 +2,23 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#3A5F0B">
 <title>Elite Hormone Dynamics — Elite Fit Training</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  /* BRAND COLORS */
-  --brand-green: #3A5F0B;
-  --brand-green-dark: #243B06;
-  --brand-gold: #D4AF37;
-  
-  /* UI COLORS ADAPTED TO BRAND */
-  --bg:#0a0c08; /* Darker greenish black */
-  --bg2:#12160e;
-  --bg3:#1c2218;
-  --bg4:#262e20;
-  --bg5:#303a28;
-  
-  --text:#f0f4ec;
-  --text2:#aeb8a6;
-  --text3:#6b7563;
-  --text4:#4a5242;
-  
-  --accent: var(--brand-green);
-  --accent2: var(--brand-green-dark);
-  --gold: var(--brand-gold);
-  
-  --success:#4ade80; /* Brighter green for success states */
-  --warning:#fbbf24;
-  --danger:#ef4444;
-  --pink:#f472b6;
-  
-  --border:rgba(255,255,255,0.06);
-  --border2:rgba(255,255,255,0.12);
-  
-  /* UPDATED GRADIENTS */
+  --brand-green:#3A5F0B;--brand-green-dark:#243B06;--brand-gold:#D4AF37;
+  --bg:#0a0c08;--bg2:#12160e;--bg3:#1c2218;--bg4:#262e20;--bg5:#303a28;
+  --text:#f0f4ec;--text2:#aeb8a6;--text3:#6b7563;--text4:#4a5242;
+  --accent:var(--brand-green);--accent2:var(--brand-green-dark);--gold:var(--brand-gold);
+  --success:#4ade80;--warning:#fbbf24;--danger:#ef4444;--pink:#f472b6;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
   --grad:linear-gradient(135deg,var(--brand-green) 0%,var(--brand-green-dark) 100%);
   --grad-warm:linear-gradient(135deg,var(--brand-gold) 0%,#b8860b 100%);
   --grad-success:linear-gradient(135deg,#4ade80 0%,var(--brand-green) 100%);
   --grad-fire:linear-gradient(135deg,#ef4444 0%,var(--brand-gold) 100%);
-  
-  --shadow:0 4px 24px rgba(0,0,0,0.4);
-  --shadow-lg:0 12px 48px rgba(0,0,0,0.5);
-  --shadow-glow:0 0 40px rgba(58,95,11,0.15);
-  
+  --shadow:0 4px 24px rgba(0,0,0,0.4);--shadow-lg:0 12px 48px rgba(0,0,0,0.5);--shadow-glow:0 0 40px rgba(58,95,11,0.15);
   --radius:18px;--radius-sm:12px;--radius-lg:24px;--radius-xl:32px
 }
 html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;overflow-x:hidden;min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -69,11 +41,14 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .onb-title{font-size:32px;font-weight:900;margin-bottom:12px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
 .onb-sub{font-size:15px;color:var(--text2);margin-bottom:32px;line-height:1.6}
 .onb-goals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;text-align:left}
-.onb-goal{background:var(--bg2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
-.onb-goal:hover{border-color:var(--border2);transform:translateY(-2px)}
-.onb-goal.selected{border-color:var(--accent);background:rgba(58,95,11,0.15);box-shadow:0 0 20px rgba(58,95,11,0.2)}
-.onb-goal-icon{font-size:24px}
-.onb-goal-text{font-size:13px;font-weight:600}
+.onb-goals .onb-card:last-child{grid-column:1 / -1;justify-content:center}
+.onb-card{background:var(--bg2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
+.onb-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.onb-card.selected{border-color:var(--accent);background:rgba(58,95,11,0.15);box-shadow:0 0 20px rgba(58,95,11,0.2)}
+.onb-card-icon{font-size:28px}
+.onb-card-text{font-size:13px;font-weight:600}
+.onb-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;color:var(--text);font-size:15px;margin-bottom:12px;transition:all 0.2s}
+.onb-input:focus{border-color:var(--brand-green);background:var(--bg3)}
 
 /* ===== HEADER & LOGO ===== */
 .header{position:sticky;top:0;z-index:100;background:rgba(10,12,8,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
@@ -94,11 +69,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px}
 .section-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;display:flex;align-items:center;gap:8px}
 .section-badge{background:var(--grad);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px}
-
-/* ===== GREETING ===== */
-.greeting{padding:8px 0 16px}
-.greeting-hello{font-size:14px;color:var(--text2);font-weight:500}
-.greeting-name{font-size:24px;font-weight:800;margin-top:2px;letter-spacing:-0.5px}
 
 /* ===== SCORE CARD ===== */
 .score-card{background:linear-gradient(135deg,#151a12 0%,#0a0c08 100%);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
@@ -136,7 +106,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .qs-bar{height:3px;background:var(--bg4);border-radius:2px;margin-top:8px;overflow:hidden}
 .qs-bar-fill{height:100%;border-radius:2px;transition:width 0.6s ease}
 
-/* ===== TODAY CHECKLIST ===== */
+/* ===== CHECKLIST & NEXT ACTION ===== */
 .checklist{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
 .checklist-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .checklist-title{font-size:14px;font-weight:700}
@@ -152,7 +122,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .check-text{flex:1;font-size:13px;font-weight:600}
 .check-action{font-size:11px;color:var(--accent);font-weight:700}
 
-/* ===== NEXT ACTION ===== */
 .next-action{background:linear-gradient(135deg,rgba(74,222,128,0.1),rgba(58,95,11,0.05));border:1px solid rgba(74,222,128,0.25);border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.2s}
 .next-action:hover{transform:translateY(-2px);border-color:rgba(74,222,128,0.5);box-shadow:0 8px 24px rgba(74,222,128,0.15)}
 .next-action-icon{width:48px;height:48px;border-radius:14px;background:var(--grad-success);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 16px rgba(74,222,128,0.3)}
@@ -161,28 +130,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .next-action-title{font-size:15px;font-weight:700;margin-bottom:2px}
 .next-action-desc{font-size:12px;color:var(--text2)}
 .next-action-arrow{font-size:20px;color:var(--success)}
-
-/* ===== TIMELINE ===== */
-.timeline{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
-.timeline-empty{text-align:center;padding:24px 16px;color:var(--text3)}
-.timeline-empty-icon{font-size:48px;margin-bottom:8px;opacity:0.5}
-.timeline-empty-text{font-size:13px}
-.timeline-periods{display:flex;flex-direction:column;gap:14px}
-.timeline-period{position:relative}
-.timeline-period-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.timeline-period-icon{font-size:16px}
-.timeline-period-name{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.8px}
-.timeline-period-time{font-size:10px;color:var(--text3);margin-left:auto}
-.timeline-items{display:flex;flex-direction:column;gap:6px;padding-left:28px;border-left:2px solid var(--border);margin-left:8px}
-.timeline-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;position:relative;transition:all 0.2s}
-.timeline-item:hover{border-color:var(--border2)}
-.timeline-item::before{content:"";position:absolute;left:-34px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
-.timeline-item-emoji{font-size:20px}
-.timeline-item-info{flex:1;min-width:0}
-.timeline-item-name{font-size:13px;font-weight:600;margin-bottom:2px}
-.timeline-item-meta{font-size:10px;color:var(--text3)}
-.timeline-item-score{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(74,222,128,0.15);color:var(--success)}
-.timeline-item-score.neg{background:rgba(239,68,68,0.15);color:var(--danger)}
 
 /* ===== CRITICAL HORMONES ===== */
 .crit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
@@ -203,7 +150,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .crit-bar{height:4px;background:var(--bg4);border-radius:2px;margin-top:8px;overflow:hidden}
 .crit-bar-fill{height:100%;border-radius:2px;transition:width 0.4s ease}
 
-/* ===== QUICK ADD ===== */
+/* ===== QUICK ADD & TRACKER ===== */
 .quick-add{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin-bottom:4px}
 .quick-add::-webkit-scrollbar{display:none}
 .quick-btn{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:80px;cursor:pointer;transition:all 0.2s}
@@ -211,38 +158,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .quick-btn-emoji{font-size:24px}
 .quick-btn-name{font-size:10px;font-weight:600;color:var(--text2);text-align:center}
 
-/* ===== HORMONES ===== */
-.hormone-filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;scrollbar-width:none}
-.hormone-filters::-webkit-scrollbar{display:none}
-.horm-filter{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:6px 12px;font-size:11px;font-weight:600;white-space:nowrap;cursor:pointer;transition:all 0.2s;color:var(--text2)}
-.horm-filter.active{background:var(--grad);color:#fff;border-color:transparent}
-.hormone-list{display:flex;flex-direction:column;gap:8px}
-.hormone-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;display:flex;align-items:center;gap:12px;transition:all 0.2s}
-.hormone-item:hover{border-color:var(--border2)}
-.hormone-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.hormone-info{flex:1;min-width:0}
-.hormone-name{font-weight:700;font-size:13px;margin-bottom:2px}
-.hormone-desc{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hormone-level{text-align:right;flex-shrink:0}
-.hormone-value{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;margin-bottom:2px}
-.hormone-trend{font-size:10px;font-weight:600}
-.level-bar{height:4px;background:var(--bg4);border-radius:2px;margin-top:6px;overflow:hidden}
-.level-bar-fill{height:100%;border-radius:2px;transition:width 0.4s ease}
-
-/* ===== DONUT CHART ===== */
-.donut-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:20px}
-.donut-chart{position:relative;width:140px;height:140px;flex-shrink:0}
-.donut-chart svg{width:140px;height:140px;transform:rotate(-90deg)}
-.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.donut-center-val{font-size:22px;font-weight:900;letter-spacing:-0.5px}
-.donut-center-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
-.donut-legend{flex:1;display:flex;flex-direction:column;gap:8px}
-.donut-legend-item{display:flex;align-items:center;gap:8px;font-size:12px}
-.donut-legend-color{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.donut-legend-name{flex:1;color:var(--text2);font-weight:500}
-.donut-legend-val{font-weight:700;font-variant-numeric:tabular-nums}
-
-/* ===== TRACKER ===== */
 .tracker-tabs{display:flex;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;margin-bottom:16px}
 .tracker-tab{flex:1;padding:10px;border-radius:8px;font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;transition:all 0.2s;text-align:center}
 .tracker-tab.active{background:var(--grad);color:#fff}
@@ -269,12 +184,12 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .effect-chip.pos{color:var(--success);background:rgba(74,222,128,0.12)}
 .effect-chip.neg{color:var(--danger);background:rgba(239,68,68,0.12)}
 
-/* ===== PROGRESS VIEW ===== */
+/* ===== PROGRESS & REPORT ===== */
 .progress-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;scrollbar-width:none}
 .progress-tabs::-webkit-scrollbar{display:none}
 .progress-tab{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:8px 14px;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer;transition:all 0.2s;color:var(--text2)}
 .progress-tab.active{background:var(--grad);color:#fff;border-color:transparent}
-.weight-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+.weight-card,.water-card,.streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
 .weight-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .weight-title{font-size:14px;font-weight:700}
 .weight-current{font-size:28px;font-weight:900;letter-spacing:-1px}
@@ -287,7 +202,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .weight-input input:focus{outline:none;border-color:var(--accent)}
 .weight-input button{background:var(--grad);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;font-size:13px}
 
-.water-card{background:linear-gradient(135deg,rgba(58,95,11,0.15),rgba(58,95,11,0.02));border:1px solid rgba(58,95,11,0.3);border-radius:var(--radius);padding:20px;text-align:center}
+.water-card{background:linear-gradient(135deg,rgba(58,95,11,0.15),rgba(58,95,11,0.02));border:1px solid rgba(58,95,11,0.3);text-align:center}
 .water-bottle{font-size:64px;margin-bottom:8px}
 .water-current{font-size:36px;font-weight:900;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .water-target{font-size:13px;color:var(--text2);margin-bottom:12px}
@@ -297,7 +212,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .water-btn{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s}
 .water-btn:hover{background:var(--bg4);border-color:var(--accent)}
 
-.streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
 .streak-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .streak-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
 .streak-count{font-size:28px;font-weight:900;background:var(--grad-warm);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -320,7 +234,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .achievement.unlocked .achievement-icon{animation:bounce 2s ease-in-out infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-/* ===== REPORT ===== */
 .report-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
 .report-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .report-icon{font-size:24px}
@@ -366,8 +279,8 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .faq-item.open .faq-toggle{transform:rotate(45deg)}
 .faq-toggle{font-size:18px;transition:transform 0.2s;color:var(--accent)}
 
-/* ===== BUTTONS ===== */
-.btn{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+/* ===== BUTTONS & MODAL ===== */
+.btn{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(58,95,11,0.3)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(58,95,11,0.4)}
 .btn-primary:active{transform:scale(0.98)}
@@ -377,7 +290,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .btn-gold{background:var(--grad-warm);color:#000;text-decoration:none;font-weight:800}
 .btn-success{background:var(--success);color:#000}
 
-/* ===== BOTTOM NAV ===== */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,12,8,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:100}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;cursor:pointer;color:var(--text3);transition:all 0.2s;border-radius:12px;position:relative}
 .nav-item:hover{color:var(--text2)}
@@ -389,7 +301,6 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .nav-add-btn:hover{transform:scale(1.05)}
 .nav-add-btn:active{transform:scale(0.95)}
 
-/* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.active{display:flex}
 .modal{background:var(--bg2);border-radius:24px 24px 0 0;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:22px;animation:slideUp 0.3s ease}
@@ -399,22 +310,13 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .modal-close{width:34px;height:34px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.2s;border:1px solid var(--border)}
 .modal-close:hover{background:var(--bg4);transform:rotate(90deg)}
 
-/* ===== FORM ===== */
 .form-group{margin-bottom:16px}
 .form-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:block;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
 .form-input,.form-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--text);font-size:14px;transition:all 0.2s}
 .form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);background:var(--bg4)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .form-hint{font-size:11px;color:var(--text3);margin-top:4px}
-.form-check{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s;margin-bottom:6px}
-.form-check:hover{border-color:var(--border2)}
-.form-check.selected{border-color:var(--accent);background:rgba(58,95,11,0.15)}
-.form-check-icon{font-size:18px}
-.form-check-text{flex:1;font-size:13px;font-weight:600}
-.form-check-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all 0.2s}
-.form-check.selected .form-check-check{background:var(--accent);border-color:var(--accent);color:#000}
 
-/* ===== CONFIG ===== */
 .config-section{margin-bottom:18px}
 .config-label{font-size:11px;color:var(--text2);margin-bottom:8px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
 .config-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -427,23 +329,19 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .option-btn:hover{background:var(--bg4);color:var(--text)}
 .option-btn.active{background:var(--grad);color:#fff;border-color:transparent}
 
-/* ===== TOAST ===== */
 .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;z-index:300;opacity:0;pointer-events:none;transition:all 0.3s;box-shadow:var(--shadow);max-width:90%;display:flex;align-items:center;gap:8px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.success{border-color:var(--success);color:var(--success)}
 .toast.error{border-color:var(--danger);color:var(--danger)}
 
-/* ===== CONFETTI ===== */
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:400;overflow:hidden}
 .confetti{position:absolute;width:8px;height:8px;top:-10px;animation:confetti-fall 3s linear forwards}
 @keyframes confetti-fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 
-/* ===== UTILS ===== */
 .hidden{display:none!important}
 .mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}
 .divider{height:1px;background:var(--border);margin:18px 0}
 
-/* ===== COACHING CTA ===== */
 .coaching-cta{background:var(--grad-warm);border-radius:var(--radius);padding:24px 20px;text-align:center;margin-top:20px;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(212,175,55,0.2)}
 .coaching-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,255,255,0.25),transparent 60%)}
 .coaching-title{font-size:18px;font-weight:900;margin-bottom:6px;position:relative}
@@ -451,14 +349,12 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 .coaching-btn{background:#fff;color:#000;padding:12px 24px;border-radius:12px;font-weight:800;font-size:13px;display:inline-block;text-decoration:none;position:relative;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
 .coaching-btn:hover{transform:translateY(-2px)}
 
-/* ===== RESPONSIVE ===== */
 @media(min-width:768px){
   .main{padding:24px}
   .activity-list{grid-template-columns:repeat(2,1fr)}
   .pricing-grid{grid-template-columns:repeat(2,1fr)}
   .crit-grid{grid-template-columns:repeat(3,1fr)}
   .achievements{grid-template-columns:repeat(3,1fr)}
-  .greeting-name{font-size:28px}
 }
 @media(min-width:1024px){
   body{padding-bottom:0}
@@ -482,61 +378,76 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 <!-- ONBOARDING -->
 <div class="onboarding" id="onboarding">
   <div class="onb-progress">
-    <div class="onb-progress-bar"><div class="onb-progress-fill" id="onbProg1" style="width:33%"></div></div>
+    <div class="onb-progress-bar"><div class="onb-progress-fill" id="onbProg1" style="width:25%"></div></div>
     <div class="onb-progress-bar"><div class="onb-progress-fill" id="onbProg2" style="width:0%"></div></div>
     <div class="onb-progress-bar"><div class="onb-progress-fill" id="onbProg3" style="width:0%"></div></div>
+    <div class="onb-progress-bar"><div class="onb-progress-fill" id="onbProg4" style="width:0%"></div></div>
   </div>
+  
+  <!-- Step 1: Welcome -->
   <div class="onb-step active" data-step="1">
-    <!-- Logo SVG in Onboarding -->
     <svg class="logo-svg" viewBox="0 0 100 100" style="width:80px;height:80px;margin-bottom:20px;">
-      <defs>
-        <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#3A5F0B"/>
-          <stop offset="100%" stop-color="#243B06"/>
-        </linearGradient>
-      </defs>
+      <defs><linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3A5F0B"/><stop offset="100%" stop-color="#243B06"/></linearGradient></defs>
       <circle cx="50" cy="50" r="42" fill="none" stroke="#3A5F0B" stroke-width="4" opacity="0.5"/>
       <path d="M50 10 L61 38 L90 38 L66 56 L75 85 L50 68 L25 85 L34 56 L10 38 L39 38 Z" fill="url(#starGrad)" stroke="#243B06" stroke-width="2"/>
       <path d="M38 65 Q42 55 50 55 Q58 55 62 65 L65 75 L35 75 Z" fill="#D4AF37"/>
-      <circle cx="44" cy="48" r="3" fill="#D4AF37"/>
-      <circle cx="56" cy="48" r="3" fill="#D4AF37"/>
+      <circle cx="44" cy="48" r="3" fill="#D4AF37"/><circle cx="56" cy="48" r="3" fill="#D4AF37"/>
       <path d="M40 42 Q50 35 60 42" fill="none" stroke="#D4AF37" stroke-width="2"/>
       <rect x="32" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(20 35 60)"/>
       <rect x="62" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(-20 65 60)"/>
     </svg>
     <div class="onb-title">Benvenuta in Elite Hormone</div>
-    <div class="onb-sub">Traccia le tue attività e scopri come influenzano i tuoi ormoni. Ricevi consigli personalizzati per raggiungere i tuoi obiettivi.</div>
+    <div class="onb-sub">Traccia le tue attività e scopri come influenzano i tuoi ormoni. Consigli personalizzati per raggiungere i tuoi obiettivi.</div>
     <button class="btn btn-primary" onclick="nextOnb()">Iniziamo →</button>
   </div>
+
+  <!-- Step 2: Goals -->
   <div class="onb-step" data-step="2">
     <div class="onb-icon">🎯</div>
     <div class="onb-title">I Tuoi Obiettivi</div>
     <div class="onb-sub">Seleziona tutti quelli che vuoi raggiungere</div>
     <div class="onb-goals" id="onbGoals">
-      <div class="onb-goal" data-goal="weight-loss"><div class="onb-goal-icon">️</div><div class="onb-goal-text">Dimagrire</div></div>
-      <div class="onb-goal" data-goal="muscle"><div class="onb-goal-icon">💪</div><div class="onb-goal-text">Massa muscolare</div></div>
-      <div class="onb-goal" data-goal="sleep"><div class="onb-goal-icon">😴</div><div class="onb-goal-text">Dormire meglio</div></div>
-      <div class="onb-goal" data-goal="stress"><div class="onb-goal-icon">🧘</div><div class="onb-goal-text">Ridurre stress</div></div>
-      <div class="onb-goal" data-goal="cellulite"><div class="onb-goal-icon">✨</div><div class="onb-goal-text">Anti-cellulite</div></div>
-      <div class="onb-goal" data-goal="water"><div class="onb-goal-icon">💧</div><div class="onb-goal-text">Ritenzione idrica</div></div>
-      <div class="onb-goal" data-goal="energy"><div class="onb-goal-icon"></div><div class="onb-goal-text">Più energia</div></div>
-      <div class="onb-goal" data-goal="wellness"><div class="onb-goal-icon">🌟</div><div class="onb-goal-text">Benessere</div></div>
+      <div class="onb-card" data-goal="weight-loss"><div class="onb-card-icon">⚖️</div><div class="onb-card-text">Dimagrire</div></div>
+      <div class="onb-card" data-goal="muscle"><div class="onb-card-icon">💪</div><div class="onb-card-text">Massa muscolare</div></div>
+      <div class="onb-card" data-goal="sleep"><div class="onb-card-icon">😴</div><div class="onb-card-text">Dormire meglio</div></div>
+      <div class="onb-card" data-goal="stress"><div class="onb-card-icon">🧘</div><div class="onb-card-text">Ridurre stress</div></div>
+      <div class="onb-card" data-goal="cellulite"><div class="onb-card-icon">✨</div><div class="onb-card-text">Anti-cellulite</div></div>
+      <div class="onb-card" data-goal="water"><div class="onb-card-icon">💧</div><div class="onb-card-text">Ritenzione idrica</div></div>
+      <div class="onb-card" data-goal="energy"><div class="onb-card-icon">⚡</div><div class="onb-card-text">Più energia</div></div>
+      <div class="onb-card" data-goal="wellness"><div class="onb-card-icon">🌟</div><div class="onb-card-text">Benessere</div></div>
     </div>
     <button class="btn btn-primary" onclick="nextOnb()">Continua →</button>
   </div>
+
+  <!-- Step 3: Sex & Physical Data -->
   <div class="onb-step" data-step="3">
     <div class="onb-icon">👤</div>
     <div class="onb-title">Qualcosa su di te</div>
     <div class="onb-sub">Questi dati ci aiutano a personalizzare i consigli</div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Età</label><input type="number" class="form-input" id="onbAge" value="30" min="16" max="90"></div>
-      <div class="form-group"><label class="form-label">Sesso</label><select class="form-select" id="onbSex"><option value="F">Femmina</option><option value="M">Maschio</option></select></div>
+    <div class="form-group">
+      <label class="form-label">Sesso</label>
+      <div class="option-group" id="sexSelection">
+        <button class="option-btn active" data-val="F" onclick="selectSex('F')">👩 Femmina</button>
+        <button class="option-btn" data-val="M" onclick="selectSex('M')">👨 Maschio</button>
+      </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Peso (kg)</label><input type="number" class="form-input" id="onbWeight" value="65" min="30" max="250"></div>
-      <div class="form-group"><label class="form-label">Altezza (cm)</label><input type="number" class="form-input" id="onbHeight" value="168" min="120" max="220"></div>
+      <div class="form-group"><label class="form-label">Età</label><input type="number" class="onb-input" id="onbAge" value="30" min="16" max="90"></div>
+      <div class="form-group"><label class="form-label">Peso (kg)</label><input type="number" class="onb-input" id="onbWeight" value="65" min="30" max="250"></div>
     </div>
-    <div class="form-group"><label class="form-label">Ore di sonno medie</label><input type="number" class="form-input" id="onbSleep" value="7" min="3" max="12" step="0.5"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Altezza (cm)</label><input type="number" class="onb-input" id="onbHeight" value="168" min="120" max="220"></div>
+      <div class="form-group"><label class="form-label">Sonno (ore)</label><input type="number" class="onb-input" id="onbSleep" value="7" min="3" max="12" step="0.5"></div>
+    </div>
+    <button class="btn btn-primary" onclick="nextOnb()">Continua →</button>
+  </div>
+
+  <!-- Step 4: Body Type -->
+  <div class="onb-step" data-step="4">
+    <div class="onb-icon">🏋️</div>
+    <div class="onb-title">La tua Corporatura</div>
+    <div class="onb-sub">Seleziona la morfologia che ti rappresenta meglio</div>
+    <div class="onb-goals" id="bodyTypeSelection"></div>
     <button class="btn btn-primary" onclick="finishOnb()">Inizia il Tracking ✨</button>
   </div>
 </div>
@@ -559,28 +470,19 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   <aside class="sidebar" id="sidebar">
     <div class="logo">
       <svg class="logo-svg" viewBox="0 0 100 100">
-        <defs>
-          <linearGradient id="starGradSide" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#3A5F0B"/>
-            <stop offset="100%" stop-color="#243B06"/>
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="starGradSide" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3A5F0B"/><stop offset="100%" stop-color="#243B06"/></linearGradient></defs>
         <circle cx="50" cy="50" r="42" fill="none" stroke="#3A5F0B" stroke-width="4" opacity="0.5"/>
         <path d="M50 10 L61 38 L90 38 L66 56 L75 85 L50 68 L25 85 L34 56 L10 38 L39 38 Z" fill="url(#starGradSide)" stroke="#243B06" stroke-width="2"/>
         <path d="M38 65 Q42 55 50 55 Q58 55 62 65 L65 75 L35 75 Z" fill="#D4AF37"/>
-        <circle cx="44" cy="48" r="3" fill="#D4AF37"/>
-        <circle cx="56" cy="48" r="3" fill="#D4AF37"/>
+        <circle cx="44" cy="48" r="3" fill="#D4AF37"/><circle cx="56" cy="48" r="3" fill="#D4AF37"/>
         <path d="M40 42 Q50 35 60 42" fill="none" stroke="#D4AF37" stroke-width="2"/>
         <rect x="32" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(20 35 60)"/>
         <rect x="62" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(-20 65 60)"/>
       </svg>
-      <div>
-        <div class="logo-text">EliteFit</div>
-        <div class="logo-sub">Training</div>
-      </div>
+      <div><div class="logo-text">EliteFit</div><div class="logo-sub">Training</div></div>
     </div>
     <nav class="sidebar-nav">
-      <div class="sidebar-item active" data-view="dashboard"><span class="sidebar-icon"></span>Home</div>
+      <div class="sidebar-item active" data-view="dashboard"><span class="sidebar-icon">🏠</span>Home</div>
       <div class="sidebar-item" data-view="diary"><span class="sidebar-icon">📖</span>Diario</div>
       <div class="sidebar-item" data-view="tracker"><span class="sidebar-icon">➕</span>Tracker</div>
       <div class="sidebar-item" data-view="progress"><span class="sidebar-icon">📈</span>Progresso</div>
@@ -594,25 +496,16 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     <header class="header">
       <div class="logo">
         <svg class="logo-svg" viewBox="0 0 100 100">
-          <defs>
-            <linearGradient id="starGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#3A5F0B"/>
-              <stop offset="100%" stop-color="#243B06"/>
-            </linearGradient>
-          </defs>
+          <defs><linearGradient id="starGradHeader" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3A5F0B"/><stop offset="100%" stop-color="#243B06"/></linearGradient></defs>
           <circle cx="50" cy="50" r="42" fill="none" stroke="#3A5F0B" stroke-width="4" opacity="0.5"/>
           <path d="M50 10 L61 38 L90 38 L66 56 L75 85 L50 68 L25 85 L34 56 L10 38 L39 38 Z" fill="url(#starGradHeader)" stroke="#243B06" stroke-width="2"/>
           <path d="M38 65 Q42 55 50 55 Q58 55 62 65 L65 75 L35 75 Z" fill="#D4AF37"/>
-          <circle cx="44" cy="48" r="3" fill="#D4AF37"/>
-          <circle cx="56" cy="48" r="3" fill="#D4AF37"/>
+          <circle cx="44" cy="48" r="3" fill="#D4AF37"/><circle cx="56" cy="48" r="3" fill="#D4AF37"/>
           <path d="M40 42 Q50 35 60 42" fill="none" stroke="#D4AF37" stroke-width="2"/>
           <rect x="32" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(20 35 60)"/>
           <rect x="62" y="60" width="6" height="15" rx="2" fill="#D4AF37" transform="rotate(-20 65 60)"/>
         </svg>
-        <div>
-          <div class="logo-text">EliteFit</div>
-          <div class="logo-sub">Training</div>
-        </div>
+        <div><div class="logo-text">EliteFit</div><div class="logo-sub">Training</div></div>
       </div>
       <div class="header-right">
         <div class="streak-badge"><span class="fire">🔥</span><span id="streakNum">0</span></div>
@@ -658,19 +551,19 @@ button{cursor:pointer;border:none;background:none;color:inherit}
               <div class="qs-head"><div class="qs-icon">💧</div><div class="qs-trend up" id="waterTrend">+0</div></div>
               <div class="qs-value" id="qsWater">0ml</div>
               <div class="qs-label">Acqua</div>
-              <div class="qs-bar"><div class="qs-bar-fill" id="qsWaterBar" style="width:0%;background:var(--grad)"></div></div>
+              <div class="qs-bar"><div class="qs-bar-fill" id="qsWaterBar" style="width:0%"></div></div>
             </div>
             <div class="qs-card weight" onclick="switchView('progress');switchProgressTab('weight')">
               <div class="qs-head"><div class="qs-icon">⚖️</div><div class="qs-trend down" id="weightTrend">0</div></div>
               <div class="qs-value" id="qsWeight">--kg</div>
               <div class="qs-label">Peso</div>
-              <div class="qs-bar"><div class="qs-bar-fill" id="qsWeightBar" style="width:0%;background:var(--grad-warm)"></div></div>
+              <div class="qs-bar"><div class="qs-bar-fill" id="qsWeightBar" style="width:0%"></div></div>
             </div>
             <div class="qs-card steps">
               <div class="qs-head"><div class="qs-icon">👣</div><div class="qs-trend up">+0</div></div>
               <div class="qs-value" id="qsSteps">0</div>
               <div class="qs-label">Passi (sim)</div>
-              <div class="qs-bar"><div class="qs-bar-fill" id="qsStepsBar" style="width:0%;background:var(--grad-success)"></div></div>
+              <div class="qs-bar"><div class="qs-bar-fill" id="qsStepsBar" style="width:0%"></div></div>
             </div>
           </div>
         </div>
@@ -766,7 +659,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
       <!-- PROGRESS -->
       <div id="view-progress" class="hidden">
         <div class="section">
-          <div class="section-title"> Il Tuo Progresso</div>
+          <div class="section-title">📈 Il Tuo Progresso</div>
           <div class="progress-tabs">
             <div class="progress-tab active" data-ptab="streak" onclick="switchProgressTab('streak')">🔥 Streak</div>
             <div class="progress-tab" data-ptab="weight" onclick="switchProgressTab('weight')">⚖️ Peso</div>
@@ -834,7 +727,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
   <div class="nav-item" data-view="diary"><div class="nav-icon">📖</div><div class="nav-label">Diario</div></div>
   <div class="nav-item nav-add" onclick="switchView('tracker')"><div class="nav-add-btn">+</div></div>
   <div class="nav-item" data-view="progress"><div class="nav-icon">📈</div><div class="nav-label">Progresso</div></div>
-  <div class="nav-item" data-view="report"><div class="nav-icon"></div><div class="nav-label">Report</div></div>
+  <div class="nav-item" data-view="report"><div class="nav-icon">📊</div><div class="nav-label">Report</div></div>
 </nav>
 
 <!-- CONFIG MODAL -->
@@ -857,7 +750,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     </div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Età</label><input type="number" class="form-input" id="profAge" value="30" min="16" max="90"></div>
-      <div class="form-group"><label class="form-label">Sesso</label><select class="form-select" id="profSex"><option value="F">Femmina</option><option value="M">Maschio</option></select></div>
+      <div class="form-group"><label class="form-label">Sesso</label><select class="form-select" id="profSex" onchange="updateProfileBodyTypes()"><option value="F">Femmina</option><option value="M">Maschio</option></select></div>
     </div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Peso (kg)</label><input type="number" class="form-input" id="profWeight" value="65" min="30" max="250"></div>
@@ -866,6 +759,10 @@ button{cursor:pointer;border:none;background:none;color:inherit}
     <div class="form-group"><label class="form-label">Girovita (cm)</label><input type="number" class="form-input" id="profWaist" value="72" min="40" max="180"><div class="form-hint">Utile per monitorare grasso viscerale e ritenzione</div></div>
     <div class="form-group"><label class="form-label">Ore Sonno Medie</label><input type="number" class="form-input" id="profSleep" value="7" min="3" max="12" step="0.5"></div>
     <div class="form-group"><label class="form-label">Fase del Ciclo</label><select class="form-select" id="profCycle"><option value="none">Non applicabile</option><option value="menstrual">Mestruazioni</option><option value="follicular">Fase follicolare</option><option value="ovulatory">Ovulazione</option><option value="luteal">Fase luteale</option><option value="pms">Premestruale</option></select></div>
+    <div class="form-group">
+      <label class="form-label">Corporatura</label>
+      <select class="form-select" id="profBodyType"></select>
+    </div>
     <button class="btn btn-primary" onclick="saveProfile()">💾 Salva Profilo</button>
   </div>
 </div>
@@ -875,7 +772,7 @@ button{cursor:pointer;border:none;background:none;color:inherit}
 
 <script>
 // ============================================================
-//  DATABASE ORMONI
+// 🧬 DATABASE ORMONI
 // ============================================================
 const HORMONES_DB={
   cortisol:{name:"Cortisolo",icon:"⚡",color:"#ff4757",cat:"stress",unit:"µg/dL",range:[5,25],baseline:14,circadian:{peak:8,trough:23,amp:0.6},desc:"Stress, energia"},
@@ -906,13 +803,13 @@ const HORMONES_DB={
   npy:{name:"NPY",icon:"🧠",color:"#3860d6",cat:"other",unit:"pg/mL",range:[50,300],baseline:150,circadian:{peak:22,trough:10,amp:0.3},desc:"Ansia"}
 };
 
-const HORM_CATS=[{id:"all",name:"Tutti",emoji:"🔬"},{id:"stress",name:"Stress",emoji:"⚡"},{id:"sex",name:"Sessuali",emoji:"💗"},{id:"sleep",name:"Sonno",emoji:"🌙"},{id:"metabolism",name:"Metabolismo",emoji:"🔥"},{id:"mood",name:"Umore",emoji:"☀️"},{id:"mineral",name:"Idratazione",emoji:"💧"},{id:"growth",name:"Crescita",emoji:""},{id:"thyroid",name:"Tiroide",emoji:"🦋"}];
+const HORM_CATS=[{id:"all",name:"Tutti",emoji:"🔬"},{id:"stress",name:"Stress",emoji:"⚡"},{id:"sex",name:"Sessuali",emoji:"💗"},{id:"sleep",name:"Sonno",emoji:"🌙"},{id:"metabolism",name:"Metabolismo",emoji:"🔥"},{id:"mood",name:"Umore",emoji:"☀️"},{id:"mineral",name:"Idratazione",emoji:"💧"},{id:"growth",name:"Crescita",emoji:"📈"},{id:"thyroid",name:"Tiroide",emoji:"🦋"}];
 
 // ============================================================
 // 🏃 DATABASE ATTIVITÀ
 // ============================================================
 const ACTIVITIES_DB=[
-  {id:"run",name:"Corsa",emoji:"",cat:"esercizio",duration:30,intensity:7,options:{type:["Lenta","Media","Veloce"],env:["Outdoor","Tapis"]},modifiers:{type:{"Lenta":0.7,"Media":1,"Veloce":1.3},env:{"Outdoor":1.1,"Tapis":1}},effects:{cortisol:15,adrenaline:40,endorphins:50,dopamine:25,gh:40,testosterone:20,serotonin:20,bdnf:40,insulin:-30,leptin:15,aldosterone:-10}},
+  {id:"run",name:"Corsa",emoji:"🏃",cat:"esercizio",duration:30,intensity:7,options:{type:["Lenta","Media","Veloce"],env:["Outdoor","Tapis"]},modifiers:{type:{"Lenta":0.7,"Media":1,"Veloce":1.3},env:{"Outdoor":1.1,"Tapis":1}},effects:{cortisol:15,adrenaline:40,endorphins:50,dopamine:25,gh:40,testosterone:20,serotonin:20,bdnf:40,insulin:-30,leptin:15,aldosterone:-10}},
   {id:"weights",name:"Pesi",emoji:"🏋️",cat:"esercizio",duration:60,intensity:8,options:{type:["Forza","Ipertrofia","Circuito"]},modifiers:{type:{"Forza":1.2,"Ipertrofia":1,"Circuito":1.1}},effects:{testosterone:35,gh:45,igf1:20,cortisol:20,dopamine:30,endorphins:30,insulin:-25}},
   {id:"hiit",name:"HIIT",emoji:"💥",cat:"esercizio",duration:20,intensity:9,options:{type:["Tabata","Sprint","Circuit"]},modifiers:{type:{"Tabata":1.3,"Sprint":1.4,"Circuit":1}},effects:{gh:60,testosterone:25,cortisol:35,adrenaline:50,insulin:-40,leptin:20,endorphins:40,aldosterone:-15}},
   {id:"yoga",name:"Yoga",emoji:"🧘",cat:"esercizio",duration:45,intensity:4,options:{type:["Hatha","Vinyasa","Yin"]},modifiers:{type:{"Hatha":1,"Vinyasa":1.2,"Yin":0.8}},effects:{cortisol:-30,gaba:40,serotonin:25,melatonin:15,oxytocin:20,endorphins:20}},
@@ -920,25 +817,25 @@ const ACTIVITIES_DB=[
   {id:"swim",name:"Nuoto",emoji:"🏊",cat:"esercizio",duration:45,intensity:7,effects:{testosterone:15,gh:30,endorphins:35,serotonin:20,insulin:-20,aldosterone:-12}},
   {id:"pilates",name:"Pilates",emoji:"🤸‍♀️",cat:"esercizio",duration:45,intensity:5,effects:{cortisol:-20,gaba:25,endorphins:15,serotonin:15}},
   {id:"dance",name:"Danza",emoji:"💃",cat:"esercizio",duration:45,intensity:6,effects:{endorphins:40,dopamine:35,serotonin:25,oxytocin:20,cortisol:-20,aldosterone:-10}},
-  {id:"stretch",name:"Stretching",emoji:"",cat:"esercizio",duration:15,intensity:2,effects:{cortisol:-20,gaba:20,endorphins:10}},
+  {id:"stretch",name:"Stretching",emoji:"🤸",cat:"esercizio",duration:15,intensity:2,effects:{cortisol:-20,gaba:20,endorphins:10}},
   {id:"protein",name:"Pasto Proteico",emoji:"🥩",cat:"nutrizione",duration:10,intensity:5,effects:{ghrelin:-40,leptin:25,insulin:20,testosterone:10,igf1:15}},
   {id:"carb",name:"Carboidrati",emoji:"🍝",cat:"nutrizione",duration:10,intensity:5,effects:{insulin:50,serotonin:30,ghrelin:-30,leptin:20}},
   {id:"veg",name:"Pasto Vegetale",emoji:"🥗",cat:"nutrizione",duration:10,intensity:4,effects:{insulin:15,adiponectin:15,leptin:10,ghrelin:-15,aldosterone:-5}},
   {id:"sugar",name:"Zuccheri",emoji:"🍰",cat:"nutrizione",duration:5,intensity:6,effects:{insulin:70,dopamine:40,ghrelin:10,leptin:-10,adiponectin:-15}},
-  {id:"alcohol",name:"Alcol",emoji:"",cat:"nutrizione",duration:10,intensity:7,effects:{testosterone:-30,gh:-30,cortisol:25,insulin:20,melatonin:-30,serotonin:-15,aldosterone:15}},
+  {id:"alcohol",name:"Alcol",emoji:"🍺",cat:"nutrizione",duration:10,intensity:7,effects:{testosterone:-30,gh:-30,cortisol:25,insulin:20,melatonin:-30,serotonin:-15,aldosterone:15}},
   {id:"coffee",name:"Caffè",emoji:"☕",cat:"nutrizione",duration:5,intensity:5,effects:{cortisol:15,adrenaline:25,dopamine:20,noradrenaline:20}},
   {id:"greenTea",name:"Tè Verde",emoji:"🍵",cat:"nutrizione",duration:5,intensity:3,effects:{gaba:15,dopamine:10,adiponectin:10}},
   {id:"water",name:"Acqua 500ml",emoji:"💧",cat:"nutrizione",duration:2,intensity:2,effects:{vasopressin:-10,cortisol:-5,aldosterone:-8}},
   {id:"fasting",name:"Digiuno 16h",emoji:"⏰",cat:"nutrizione",duration:60,intensity:7,effects:{gh:50,testosterone:15,insulin:-50,leptin:-20,ghrelin:30,adiponectin:25,bdnf:30}},
-  {id:"omega3",name:"Omega 3",emoji:"",cat:"nutrizione",duration:2,intensity:3,effects:{adiponectin:15,testosterone:8,serotonin:10,cortisol:-10}},
+  {id:"omega3",name:"Omega 3",emoji:"🐟",cat:"nutrizione",duration:2,intensity:3,effects:{adiponectin:15,testosterone:8,serotonin:10,cortisol:-10}},
   {id:"sleep8",name:"Sonno 8h",emoji:"😴",cat:"sonno",duration:480,intensity:5,options:{quality:["Ottima","Buona","Media","Scarsa"]},modifiers:{quality:{"Ottima":1.3,"Buona":1.1,"Media":0.8,"Scarsa":0.4}},effects:{gh:60,melatonin:50,gaba:30,cortisol:-30,testosterone:25,leptin:25,ghrelin:-20,bdnf:30,serotonin:20,aldosterone:-10}},
   {id:"sleep6",name:"Sonno 6h",emoji:"🛌",cat:"sonno",duration:360,intensity:4,effects:{gh:30,melatonin:30,cortisol:10,testosterone:-10,ghrelin:15,leptin:-10}},
   {id:"nap",name:"Power Nap",emoji:"💤",cat:"sonno",duration:20,intensity:3,effects:{cortisol:-15,gh:15,dopamine:15}},
   {id:"badSleep",name:"Sonno Disturbato",emoji:"😵",cat:"sonno",duration:480,intensity:6,effects:{gh:-30,melatonin:-30,cortisol:30,testosterone:-20,ghrelin:25,leptin:-20,serotonin:-20,aldosterone:15}},
   {id:"noScreen",name:"No Schermi Pre-Sonno",emoji:"📵",cat:"sonno",duration:60,intensity:4,effects:{melatonin:25,gaba:15,cortisol:-10}},
-  {id:"meditation",name:"Meditazione",emoji:"‍♂️",cat:"recupero",duration:20,intensity:3,effects:{cortisol:-30,gaba:35,serotonin:20,melatonin:15,bdnf:20,oxytocin:15,npy:-20}},
-  {id:"breathwork",name:"Breathwork",emoji:"️",cat:"recupero",duration:15,intensity:4,effects:{cortisol:-25,gaba:25,noradrenaline:20,endorphins:15,serotonin:15}},
-  {id:"coldShower",name:"Doccia Fredda",emoji:"",cat:"recupero",duration:5,intensity:7,effects:{adrenaline:80,noradrenaline:60,dopamine:50,cortisol:15,endorphins:20,aldosterone:-10}},
+  {id:"meditation",name:"Meditazione",emoji:"🧘‍♂️",cat:"recupero",duration:20,intensity:3,effects:{cortisol:-30,gaba:35,serotonin:20,melatonin:15,bdnf:20,oxytocin:15,npy:-20}},
+  {id:"breathwork",name:"Breathwork",emoji:"🌬️",cat:"recupero",duration:15,intensity:4,effects:{cortisol:-25,gaba:25,noradrenaline:20,endorphins:15,serotonin:15}},
+  {id:"coldShower",name:"Doccia Fredda",emoji:"🥶",cat:"recupero",duration:5,intensity:7,effects:{adrenaline:80,noradrenaline:60,dopamine:50,cortisol:15,endorphins:20,aldosterone:-10}},
   {id:"sauna",name:"Sauna",emoji:"🧖",cat:"recupero",duration:20,intensity:6,effects:{gh:30,endorphins:30,cortisol:10,dopamine:20,aldosterone:-15}},
   {id:"massage",name:"Massaggio",emoji:"💆",cat:"recupero",duration:45,intensity:4,effects:{cortisol:-35,oxytocin:40,serotonin:25,dopamine:20,gaba:20,aldosterone:-12}},
   {id:"nature",name:"Natura",emoji:"🌲",cat:"recupero",duration:30,intensity:3,effects:{cortisol:-30,serotonin:20,dopamine:15,bdnf:15}},
@@ -961,7 +858,7 @@ const ACTIVITIES_DB=[
   {id:"gratitude",name:"Gratitudine",emoji:"🙏",cat:"mentale",duration:10,intensity:3,effects:{serotonin:25,dopamine:15,cortisol:-15,oxytocin:10}}
 ];
 
-const CATEGORIES=[{id:"all",name:"Tutte",emoji:""},{id:"esercizio",name:"Esercizio",emoji:"💪"},{id:"nutrizione",name:"Nutrizione",emoji:"🍽️"},{id:"sonno",name:"Sonno",emoji:"😴"},{id:"recupero",name:"Recupero",emoji:"🧘"},{id:"sociale",name:"Sociale",emoji:"❤️"},{id:"luce",name:"Luce",emoji:"☀️"},{id:"integratori",name:"Integratori",emoji:"💊"},{id:"mentale",name:"Mentale",emoji:"🧠"},{id:"vizi",name:"Vizi",emoji:"⚠️"}];
+const CATEGORIES=[{id:"all",name:"Tutte",emoji:"🔥"},{id:"esercizio",name:"Esercizio",emoji:"💪"},{id:"nutrizione",name:"Nutrizione",emoji:"🍽️"},{id:"sonno",name:"Sonno",emoji:"😴"},{id:"recupero",name:"Recupero",emoji:"🧘"},{id:"sociale",name:"Sociale",emoji:"❤️"},{id:"luce",name:"Luce",emoji:"☀️"},{id:"integratori",name:"Integratori",emoji:"💊"},{id:"mentale",name:"Mentale",emoji:"🧠"},{id:"vizi",name:"Vizi",emoji:"⚠️"}];
 
 const QUICK_ADD=["coffee","water","walk","meditation","sleep8","sunrise"];
 
@@ -970,7 +867,7 @@ const CHECKLIST=[
   {id:"sun",icon:"🌅",text:"Luce solare al mattino",actId:"sunrise"},
   {id:"move",icon:"🏃",text:"Almeno 30min di movimento",actId:"walk"},
   {id:"veg",icon:"🥗",text:"Pasto vegetale",actId:"veg"},
-  {id:"sleep",icon:"",text:"Niente schermi prima di dormire",actId:"noScreen"}
+  {id:"sleep",icon:"😴",text:"Niente schermi prima di dormire",actId:"noScreen"}
 ];
 
 const ACHIEVEMENTS=[
@@ -998,10 +895,30 @@ const PRICING={
 };
 
 // ============================================================
+// 🧬 BODY TYPES CONFIGURATION
+// ============================================================
+const bodyTypes = {
+  M: [
+    { id: 'very_lean', name: 'Molto magro', icon: '🧍‍♂️' },
+    { id: 'lean', name: 'Magro', icon: '🚶‍♂️' },
+    { id: 'normal', name: 'Normopeso', icon: '🧑' },
+    { id: 'muscular', name: 'Muscoloso', icon: '🏋️‍♂️' },
+    { id: 'overweight', name: 'Robusto', icon: '🧔' }
+  ],
+  F: [
+    { id: 'very_lean', name: 'Molto magra', icon: '🧍‍♀️' },
+    { id: 'lean', name: 'Magra', icon: '💃' },
+    { id: 'normal', name: 'Normopeso', icon: '🧑‍🦱' },
+    { id: 'muscular', name: 'Muscolosa', icon: '🏋️‍♀️' },
+    { id: 'overweight', name: 'Robusta', icon: '👩' }
+  ]
+};
+
+// ============================================================
 // 🎮 STATE
 // ============================================================
 let state={
-  profile:{age:30,sex:"F",weight:65,height:168,waist:72,sleep:7,cycle:"none",goals:["wellness"]},
+  profile:{age:30,sex:"F",weight:65,height:168,waist:72,sleep:7,cycle:"none",goals:["wellness"],bodyType:"normal"},
   hormoneLevels:{},
   todayActivities:[],
   history:[],
@@ -1022,6 +939,8 @@ let state={
 };
 
 let onbStep=1,onbGoals=[];
+let selectedSex = 'F';
+let selectedBodyType = 'normal';
 
 // ============================================================
 // 🚀 INIT
@@ -1046,7 +965,7 @@ function initHormones(){Object.keys(HORMONES_DB).forEach(k=>{if(state.hormoneLev
 // 🎯 ONBOARDING
 // ============================================================
 function setupOnboarding(){
-  document.querySelectorAll(".onb-goal").forEach(g=>{
+  document.querySelectorAll(".onb-card").forEach(g=>{
     g.addEventListener("click",()=>{
       g.classList.toggle("selected");
       const id=g.dataset.goal;
@@ -1055,21 +974,51 @@ function setupOnboarding(){
     });
   });
 }
+
+function selectSex(sex) {
+  selectedSex = sex;
+  document.querySelectorAll('#sexSelection .option-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.val === sex);
+  });
+  renderBodyTypes();
+}
+
+function renderBodyTypes() {
+  const container = document.getElementById("bodyTypeSelection");
+  container.innerHTML = bodyTypes[selectedSex].map(bt => `
+    <div class="onb-card ${bt.id === selectedBodyType ? 'selected' : ''}" onclick="selectBodyType('${bt.id}')">
+      <div class="onb-card-icon">${bt.icon}</div>
+      <div class="onb-card-text">${bt.name}</div>
+    </div>
+  `).join('');
+}
+
+function selectBodyType(id) {
+  selectedBodyType = id;
+  renderBodyTypes();
+}
+
 function nextOnb(){
-  if(onbStep<3){
+  if(onbStep<4){
     document.querySelector(`.onb-step[data-step="${onbStep}"]`).classList.remove("active");
     onbStep++;
     document.querySelector(`.onb-step[data-step="${onbStep}"]`).classList.add("active");
-    document.getElementById(`onbProg${onbStep-1}`).style.width="100%";
-    document.getElementById(`onbProg${onbStep}`).style.width="33%";
+    for(let i=1; i<=4; i++){
+      document.getElementById(`onbProg${i}`).style.width = i <= onbStep ? "100%" : "0%";
+    }
+    if(onbStep === 4){
+      renderBodyTypes();
+    }
   }
 }
+
 function finishOnb(){
   state.profile.age=parseInt(document.getElementById("onbAge").value);
-  state.profile.sex=document.getElementById("onbSex").value;
+  state.profile.sex=selectedSex;
   state.profile.weight=parseInt(document.getElementById("onbWeight").value);
   state.profile.height=parseInt(document.getElementById("onbHeight").value);
   state.profile.sleep=parseFloat(document.getElementById("onbSleep").value);
+  state.profile.bodyType=selectedBodyType;
   state.profile.goals=onbGoals.length>0?onbGoals:["wellness"];
   state.onboardingDone=true;
   if(state.weightLog.length===0)state.weightLog=[{date:new Date().toISOString(),weight:state.profile.weight}];
@@ -1111,9 +1060,7 @@ function applyActivity(act,dur,int,opts){
   applySynergies(mult);
   Object.keys(HORMONES_DB).forEach(k=>{const h=HORMONES_DB[k];state.hormoneLevels[k]=Math.max(h.range[0]*0.3,Math.min(h.range[1]*2,state.hormoneLevels[k]))});
   state.todayActivities.push({id:act.id,name:act.name,emoji:act.emoji,duration:dur,intensity:int,options:opts,cat:act.cat,time:new Date().toISOString()});
-  // Water tracking
   if(act.id==="water")state.water+=500;
-  // Steps simulation
   if(act.cat==="esercizio")state.steps=(state.steps||0)+Math.round(dur*100*(int/5));
   saveState();
   checkAchievements();
@@ -1156,7 +1103,7 @@ function getCategoryScore(cat){
 }
 
 // ============================================================
-//  ACHIEVEMENTS
+// 🏆 ACHIEVEMENTS
 // ============================================================
 function checkAchievements(){
   ACHIEVEMENTS.forEach(a=>{
@@ -1264,8 +1211,8 @@ function renderNextAction(){
   if(state.todayActivities.length===0){
     if(h<10){actId="sunrise";ic="🌅";ti="Esponiti alla luce";de="15 min di luce solare attivano cortisolo e serotonina"}
     else if(h<14){actId="walk";ic="🚶";ti="Camminata post-pranzo";de="Stabilizza glicemia e riduce insulina"}
-    else if(h<19){actId="weights";ic="️";ti="Sessione di pesi";de="Finestra ottimale per testosterone e GH"}
-    else{actId="noScreen";ic="";ti="Prepara il sonno";de="Niente schermi 1h prima di dormire"}
+    else if(h<19){actId="weights";ic="🏋️";ti="Sessione di pesi";de="Finestra ottimale per testosterone e GH"}
+    else{actId="noScreen";ic="😴";ti="Prepara il sonno";de="Niente schermi 1h prima di dormire"}
   }else{
     if(state.hormoneLevels.cortisol>HORMONES_DB.cortisol.baseline*1.2){actId="meditation";ic="🧘";ti="Abbassa il cortisolo";de="10 min di meditazione = -25% cortisolo"}
     else if(state.hormoneLevels.aldosterone>HORMONES_DB.aldosterone.baseline*1.2){actId="water";ic="💧";ti="Bevi acqua";de="Riduci ritenzione con idratazione"}
@@ -1313,7 +1260,7 @@ function renderDiary(){
     tl.innerHTML=`<div class="timeline-empty"><div class="timeline-empty-icon">📖</div><div class="timeline-empty-text">Il tuo diario è vuoto.<br>Inizia registrando la tua prima attività!</div></div>`;
   }else{
     const periods=[
-      {name:"Mattina",icon:"",start:5,end:12},
+      {name:"Mattina",icon:"🌅",start:5,end:12},
       {name:"Pranzo",icon:"☀️",start:12,end:14},
       {name:"Pomeriggio",icon:"🌤️",start:14,end:19},
       {name:"Sera",icon:"🌙",start:19,end:24}
@@ -1417,7 +1364,7 @@ function renderActivities(){
     renderActivityList();
   }
   document.querySelectorAll(".activity-item").forEach(i=>i.addEventListener("click",()=>{
-    if(i.dataset.locked){showToast(" Passa a Advanced!","error");switchView("solutions");return}
+    if(i.dataset.locked){showToast("🔒 Passa a Advanced!","error");switchView("solutions");return}
     openActivityConfig(i.dataset.id);
   }));
 }
@@ -1435,7 +1382,7 @@ function renderActivityList(){
 function renderActivityItem(a,locked){
   const ef=Object.entries(a.effects||{}).slice(0,4).map(([h,v])=>{const n=HORMONES_DB[h]?.name.split(" ")[0]||h;return`<span class="effect-chip ${v>0?'pos':'neg'}">${v>0?'+':''}${v} ${n}</span>`}).join("");
   const optCount=a.options?Object.keys(a.options).length:0;
-  return`<div class="activity-item" data-id="${a.id}" ${locked?'data-locked="true"':''}><div class="activity-head"><div class="activity-emoji">${a.emoji}</div><div><div class="activity-name">${a.name}</div>${optCount>0?`<div class="activity-meta">${optCount} opzioni</div>`:''}</div><div class="activity-tag">${a.cat}</div>${locked?'<div class="effect-chip neg"> PRO</div>':''}</div><div class="activity-effects">${ef}</div></div>`;
+  return`<div class="activity-item" data-id="${a.id}" ${locked?'data-locked="true"':''}><div class="activity-head"><div class="activity-emoji">${a.emoji}</div><div><div class="activity-name">${a.name}</div>${optCount>0?`<div class="activity-meta">${optCount} opzioni</div>`:''}</div><div class="activity-tag">${a.cat}</div>${locked?'<div class="effect-chip neg">🔒 PRO</div>':''}</div><div class="activity-effects">${ef}</div></div>`;
 }
 
 function setupSearch(){document.getElementById("activitySearch").addEventListener("input",e=>{state.searchQuery=e.target.value;renderActivities()})}
@@ -1512,7 +1459,7 @@ function renderProgress(){
         }).join("")}</div>
       </div>
       <div class="report-card">
-        <div class="report-head"><div class="report-icon"></div><div class="report-title">Statistiche Streak</div></div>
+        <div class="report-head"><div class="report-icon">📊</div><div class="report-title">Statistiche Streak</div></div>
         <div class="report-stats">
           <div class="report-stat"><div class="report-stat-value">${state.streak}</div><div class="report-stat-label">Attuale</div></div>
           <div class="report-stat"><div class="report-stat-value">${Math.max(state.streak,7)}</div><div class="report-stat-label">Record</div></div>
@@ -1601,7 +1548,6 @@ function renderReport(){
   document.getElementById("compToday").textContent=score;
   document.getElementById("compYesterday").textContent="--";
   
-  // Chart
   const chart=document.getElementById("reportChart");
   const days=["Lun","Mar","Mer","Gio","Ven","Sab","Ogg"];
   const values=[45,62,58,70,65,72,score];
@@ -1647,6 +1593,14 @@ function renderPricing(){
 function switchPricing(p){state.pricingPeriod=p;document.querySelectorAll(".pricing-toggle-btn").forEach(b=>b.classList.toggle("active",b.dataset.period===p));renderPricing()}
 function activatePlan(p){state.plan=p;saveState();showToast(`✓ Piano ${p.toUpperCase()} attivato (demo)`,"success");renderActivities()}
 
+function updateProfileBodyTypes(){
+  const sex = document.getElementById("profSex").value;
+  const btSelect = document.getElementById("profBodyType");
+  btSelect.innerHTML = bodyTypes[sex].map(bt => 
+    `<option value="${bt.id}" ${state.profile.bodyType === bt.id ? 'selected' : ''}>${bt.icon} ${bt.name}</option>`
+  ).join('');
+}
+
 function openProfile(){
   document.getElementById("profAge").value=state.profile.age;
   document.getElementById("profSex").value=state.profile.sex;
@@ -1655,8 +1609,10 @@ function openProfile(){
   document.getElementById("profWaist").value=state.profile.waist;
   document.getElementById("profSleep").value=state.profile.sleep;
   document.getElementById("profCycle").value=state.profile.cycle||"none";
+  updateProfileBodyTypes();
   document.getElementById("profileModal").classList.add("active");
 }
+
 function saveProfile(){
   state.profile.age=parseInt(document.getElementById("profAge").value);
   state.profile.sex=document.getElementById("profSex").value;
@@ -1665,6 +1621,7 @@ function saveProfile(){
   state.profile.waist=parseInt(document.getElementById("profWaist").value);
   state.profile.sleep=parseFloat(document.getElementById("profSleep").value);
   state.profile.cycle=document.getElementById("profCycle").value;
+  state.profile.bodyType=document.getElementById("profBodyType").value;
   saveState();closeModal("profileModal");renderAll();showToast("✓ Profilo salvato","success");
 }
 
