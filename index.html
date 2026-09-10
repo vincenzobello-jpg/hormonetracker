@@ -299,21 +299,10 @@ a { text-decoration: none; color: inherit; }
 .progress-tab:hover { background: var(--bg3); color: var(--text); }
 .progress-tab.active { background: var(--grad); color: #fff; border-color: transparent; }
 
-.streak-card, .water-card, .weight-card {
+.water-card, .weight-card, .storage-card {
   background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 18px; margin-bottom: 14px; box-shadow: var(--shadow);
 }
-.streak-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.streak-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.streak-count { font-size: 28px; font-weight: 900; background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.streak-calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.streak-day { aspect-ratio: 1; border-radius: 4px; background: var(--bg3); position: relative; cursor: pointer; transition: all 0.2s; }
-.streak-day:hover { transform: scale(1.1); }
-.streak-day.active { background: var(--grad-gold); }
-.streak-day.today { outline: 2px solid var(--brand-green); outline-offset: 1px; }
-.streak-day-labels { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
-.streak-day-label { text-align: center; font-size: 9px; color: var(--text3); font-weight: 600; }
-
 .water-card { background: linear-gradient(135deg, rgba(58,95,11,0.1), rgba(58,95,11,0.03)); border-color: rgba(58,95,11,0.25); text-align: center; }
 .water-bottle { font-size: 64px; margin-bottom: 8px; }
 .water-current { font-size: 36px; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px; }
@@ -327,7 +316,7 @@ a { text-decoration: none; color: inherit; }
 }
 .water-btn:hover { background: var(--bg4); border-color: var(--brand-green); }
 
-.weight-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.weight-head { display: flex; align-items: center; justify-content:space-between; margin-bottom: 12px; }
 .weight-title { font-size: 14px; font-weight: 700; }
 .weight-current { font-size: 28px; font-weight: 900; letter-spacing: -1px; }
 .weight-change { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 8px; }
@@ -345,6 +334,10 @@ a { text-decoration: none; color: inherit; }
   font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
 .weight-input button:hover { transform: translateY(-1px); }
+
+.storage-info { text-align: center; padding: 20px; }
+.storage-badge { display: inline-block; background: var(--grad); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 700; margin-bottom: 12px; }
+.storage-text { font-size: 14px; color: var(--text2); line-height: 1.6; }
 
 .achievements { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .achievement {
@@ -480,7 +473,7 @@ a { text-decoration: none; color: inherit; }
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 200; display: none; align-items: flex-end; justify-content: center; }
 .modal-overlay.active { display: flex; }
 .modal { background: var(--bg2); border-radius: 26px 26px 0 0; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 24px; animation: slideUp 0.3s ease; }
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
 .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
 .modal-title { font-size: 20px; font-weight: 800; }
 .modal-close { width: 38px; height: 38px; border-radius: 50%; background: var(--bg3); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; border: 1px solid var(--border); transition: all 0.2s; }
@@ -658,6 +651,8 @@ a { text-decoration: none; color: inherit; }
       <div class="sidebar-item active" data-view="dashboard"><span class="sidebar-icon">📊</span>Dashboard</div>
       <div class="sidebar-item" data-view="tracker"><span class="sidebar-icon">➕</span>Tracker</div>
       <div class="sidebar-item" data-view="diary"><span class="sidebar-icon">📖</span>Diario</div>
+      <div class="sidebar-item" data-view="progress"><span class="sidebar-icon">📈</span>Progresso</div>
+      <div class="sidebar-item" data-view="report"><span class="sidebar-icon">📊</span>Report</div>
       <div class="sidebar-item" data-view="solutions"><span class="sidebar-icon">💎</span>Soluzioni</div>
       <div class="sidebar-item" onclick="resetAll()" style="color: var(--danger);"><span class="sidebar-icon">🔄</span>Azzera</div>
       <div class="sidebar-item" onclick="openProfile()"><span class="sidebar-icon">⚙️</span>Profilo</div>
@@ -779,6 +774,46 @@ a { text-decoration: none; color: inherit; }
             </div>
             <div class="donut-legend" id="donutLegend"></div>
           </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS -->
+      <div id="view-progress" class="hidden">
+        <div class="section">
+          <div class="section-title">📈 Il Tuo Progresso</div>
+          <div class="progress-tabs">
+            <div class="progress-tab active" data-ptab="water" onclick="switchProgressTab('water')">💧 Acqua</div>
+            <div class="progress-tab" data-ptab="weight" onclick="switchProgressTab('weight')">⚖️ Peso</div>
+            <div class="progress-tab" data-ptab="badges" onclick="switchProgressTab('badges')">🏆 Badge</div>
+            <div class="progress-tab" data-ptab="storage" onclick="switchProgressTab('storage')">💾 Archivio</div>
+          </div>
+          <div id="progressContent"></div>
+        </div>
+      </div>
+
+      <!-- REPORT -->
+      <div id="view-report" class="hidden">
+        <div class="section">
+          <div class="section-title">📊 Report Settimanale</div>
+          <div class="report-card">
+            <div class="report-head">
+              <div class="report-icon">📈</div>
+              <div class="report-title">Ultimi 7 Giorni</div>
+            </div>
+            <div class="report-stats">
+              <div class="report-stat"><div class="report-stat-value" id="repAvgScore">--</div><div class="report-stat-label">Score Medio</div></div>
+              <div class="report-stat"><div class="report-stat-value" id="repTotalActs">--</div><div class="report-stat-label">Attività</div></div>
+              <div class="report-stat"><div class="report-stat-value" id="repBestDay">--</div><div class="report-stat-label">Giorno Top</div></div>
+            </div>
+            <div class="report-chart" id="reportChart"></div>
+            <div class="report-comparison">
+              <div class="report-comp-item"><div class="report-comp-label">Ieri</div><div class="report-comp-val" id="compYesterday">--</div></div>
+              <div class="report-comp-item"><div class="report-comp-label">Oggi</div><div class="report-comp-val" id="compToday">--</div></div>
+            </div>
+            <div id="repInsights" style="margin-top:14px"></div>
+          </div>
+          <button class="btn btn-secondary mt-12" onclick="exportCSV()">📥 Scarica CSV</button>
+          <button class="btn btn-danger mt-12" onclick="resetAll()">🔄 Azzera Tutto</button>
         </div>
       </div>
 
@@ -984,14 +1019,14 @@ const CHECKLIST = [
 
 const PRICING = {
   monthly: {
-    free: { name: "Free", price: 0, period: "/mese", desc: "Funzioni essenziali", features: ["10 attività/giorno", "26 ormoni monitorati", "Report giornaliero", "3 azioni pratiche"] },
-    advanced: { name: "Advanced", price: 9.90, period: "/mese", featured: true, desc: "Personalizzazione", features: ["Attività illimitate", "Azioni adattate al profilo", "Storico e trend", "Analisi causa-effetto", "Routine giornaliera"] },
-    professional: { name: "Professional", price: 29.90, period: "/mese", desc: "Protocollo completo", features: ["Tutto di Advanced", "Report PDF settimanali", "Piani personalizzati", "Export professionale", "Supporto prioritario"] }
+    free: { name: "Free", price: 0, period: "/mese", desc: "Funzioni essenziali", features: ["10 attività/giorno", "26 ormoni monitorati", "Report giornaliero", "3 azioni pratiche", "Storico 30 giorni"] },
+    advanced: { name: "Advanced", price: 9.90, period: "/mese", featured: true, desc: "Personalizzazione", features: ["Attività illimitate", "Azioni adattate al profilo", "Storico e trend", "Analisi causa-effetto", "Routine giornaliera", "Storico 90 giorni"] },
+    professional: { name: "Professional", price: 29.90, period: "/mese", desc: "Protocollo completo", features: ["Tutto di Advanced", "Report PDF settimanali", "Piani personalizzati", "Export professionale", "Supporto prioritario", "Storico 180 giorni"] }
   },
   yearly: {
-    free: { name: "Free", price: 0, period: "/anno", desc: "Funzioni essenziali", features: ["10 attività/giorno", "26 ormoni monitorati", "Report giornaliero", "3 azioni pratiche"] },
-    advanced: { name: "Advanced", price: 94.99, period: "/anno", featured: true, save: "20%", desc: "Personalizzazione", features: ["Attività illimitate", "Azioni adattate al profilo", "Storico e trend", "Analisi causa-effetto", "Routine giornaliera"] },
-    professional: { name: "Professional", price: 286.99, period: "/anno", save: "20%", desc: "Protocollo completo", features: ["Tutto di Advanced", "Report PDF settimanali", "Piani personalizzati", "Export professionale", "Supporto prioritario"] }
+    free: { name: "Free", price: 0, period: "/anno", desc: "Funzioni essenziali", features: ["10 attività/giorno", "26 ormoni monitorati", "Report giornaliero", "3 azioni pratiche", "Storico 30 giorni"] },
+    advanced: { name: "Advanced", price: 94.99, period: "/anno", featured: true, save: "20%", desc: "Personalizzazione", features: ["Attività illimitate", "Azioni adattate al profilo", "Storico e trend", "Analisi causa-effetto", "Routine giornaliera", "Storico 90 giorni"] },
+    professional: { name: "Professional", price: 286.99, period: "/anno", save: "20%", desc: "Protocollo completo", features: ["Tutto di Advanced", "Report PDF settimanali", "Piani personalizzati", "Export professionale", "Supporto prioritario", "Storico 180 giorni"] }
   }
 };
 
@@ -1016,9 +1051,9 @@ const ACHIEVEMENTS = [
   { id: "first", icon: "🎯", name: "Primo Passo", desc: "Registra 1 attività", req: 1 },
   { id: "five", icon: "⭐", name: "Cinque Stelle", desc: "5 attività in un giorno", req: 5 },
   { id: "ten", icon: "🔥", name: "Dieci di Picche", desc: "10 attività in un giorno", req: 10 },
-  { id: "streak3", icon: "🔥", name: "3 Giorni", desc: "Streak di 3 giorni", reqStreak: 3 },
-  { id: "streak7", icon: "💎", name: "Una Settimana", desc: "Streak di 7 giorni", reqStreak: 7 },
-  { id: "streak30", icon: "👑", name: "Un Mese", desc: "Streak di 30 giorni", reqStreak: 30 }
+  { id: "streak3", icon: "🔥", name: "3 Giorni", desc: "3 giorni consecutivi", reqStreak: 3 },
+  { id: "streak7", icon: "💎", name: "Una Settimana", desc: "7 giorni consecutivi", reqStreak: 7 },
+  { id: "streak30", icon: "👑", name: "Un Mese", desc: "30 giorni consecutivi", reqStreak: 30 }
 ];
 
 let state = {
@@ -1028,7 +1063,7 @@ let state = {
   plan: "free",
   currentCat: "all",
   currentTrackerTab: "all",
-  currentProgressTab: "streak",
+  currentProgressTab: "water",
   searchQuery: "",
   pricingPeriod: "monthly",
   onboardingDone: false,
@@ -1037,6 +1072,7 @@ let state = {
   steps: 0,
   streak: 0,
   weightLog: [],
+  history: [],
   unlockedAchievements: [],
   lastActivityDate: new Date().toDateString()
 };
@@ -1044,6 +1080,12 @@ let state = {
 let onbStep = 1, onbGoals = [];
 let selectedSex = 'F';
 let selectedBodyType = 'normal';
+
+function getPlanLimit() {
+  if (state.plan === 'professional') return 180;
+  if (state.plan === 'advanced') return 90;
+  return 30;
+}
 
 function init() {
   loadState();
@@ -1064,6 +1106,19 @@ function init() {
 
 function checkDateReset() {
   const today = new Date().toDateString();
+  if (state.lastActivityDate !== today && state.lastActivityDate !== "") {
+    state.history.push({
+      date: state.lastActivityDate,
+      score: calculateDailyScore(),
+      activitiesCount: state.todayActivities.length,
+      water: state.water,
+      weight: state.profile.weight
+    });
+    const limit = getPlanLimit();
+    if (state.history.length > limit) {
+      state.history = state.history.slice(-limit);
+    }
+  }
   if (state.lastActivityDate !== today) {
     if (state.todayActivities.length > 0) state.streak++;
     state.todayActivities = [];
@@ -1079,7 +1134,7 @@ function checkDateReset() {
 }
 
 function loadState() {
-  const s = localStorage.getItem("ehd_v8_state");
+  const s = localStorage.getItem("ehd_v9_state");
   if (s) { 
     try { 
       state = { ...state, ...JSON.parse(s) }; 
@@ -1091,7 +1146,7 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem("ehd_v8_state", JSON.stringify(state));
+    localStorage.setItem("ehd_v9_state", JSON.stringify(state));
   } catch(e) {
     console.error("Errore salvataggio stato:", e);
     showToast("⚠️ Spazio di archiviazione pieno", "error");
@@ -1117,11 +1172,13 @@ function applyActivity(act, configValues) {
     state.hormoneLevels[k] = Math.max(h.range[0] * 0.5, Math.min(h.range[1] * 1.5, state.hormoneLevels[k]));
   });
 
+  const durationVal = configValues.duration?.value || act.config.duration?.default || 30;
   state.todayActivities.push({ 
     id: act.id, 
     name: act.name, 
     emoji: act.emoji, 
     config: configValues,
+    duration: durationVal,
     cat: act.cat, 
     time: new Date().toISOString() 
   });
@@ -1131,8 +1188,7 @@ function applyActivity(act, configValues) {
     state.water += glasses * 250;
   }
   if (act.cat === "esercizio") {
-    const dur = configValues.duration?.value || 30;
-    state.steps += Math.round(dur * 100); 
+    state.steps += Math.round(durationVal * 100); 
   }
 
   checkAchievements();
@@ -1249,7 +1305,6 @@ function renderCritical() {
     const dp = (d / h.baseline * 100).toFixed(0);
     const t = d > 2 ? "↑" : d < -2 ? "↓" : "→";
     
-    // Calcola range dinamico per scala Y adattiva
     const baseline = h.baseline;
     const current = v;
     const margin = Math.max(Math.abs(current - baseline) * 0.5, baseline * 0.3);
@@ -1257,10 +1312,8 @@ function renderCritical() {
     const yMax = Math.max(current, baseline) + margin;
     const yRange = yMax - yMin || 1;
     
-    // Funzione di mappatura Y dinamica
     const mapY = (val) => 75 - ((val - yMin) / yRange) * 70;
     
-    // Genera punti del grafico con andamento naturale
     let pathPoints = [];
     const steps = 12;
     for(let i = 0; i <= steps; i++) {
@@ -1344,28 +1397,65 @@ function renderChecklist() {
 
 function toggleCheck(id, actId) {
   if (state.checklistDone.includes(id)) {
+    // Togliamo il check: rimuoviamo SOLO l'ultima attività aggiunta da questa checklist
     state.checklistDone = state.checklistDone.filter(x => x !== id);
-  } else {
-    state.checklistDone.push(id);
+    
+    // Trova e rimuovi l'ultima attività registrata con questo actId
+    for (let i = state.todayActivities.length - 1; i >= 0; i--) {
+      if (state.todayActivities[i].id === actId && state.todayActivities[i].fromChecklist) {
+        state.todayActivities.splice(i, 1);
+        break;
+      }
+    }
+    
+    // Recalcola i livelli ormonali rimuovendo l'effetto dell'attività
     const a = ACTIVITIES_DB.find(x => x.id === actId);
     if (a) {
-      const defaultConfig = {};
-      Object.keys(a.config).forEach(key => {
-        const cfg = a.config[key];
-        if (cfg.type === 'select') {
-          defaultConfig[key] = { type: 'select', value: cfg.options[0].value, mult: cfg.options[0].mult };
-        } else {
-          const def = cfg.default || ((cfg.min + cfg.max) / 2);
-          defaultConfig[key] = { type: 'slider', value: def, mult: 1.0, default: def };
+      Object.keys(a.effects || {}).forEach(h => {
+        if (state.hormoneLevels[h] !== undefined) {
+          // Invertiamo l'effetto (moltiplicatore base = 1.0 per default)
+          state.hormoneLevels[h] -= a.effects[h] * 0.3;
+          const hDef = HORMONES_DB[h];
+          state.hormoneLevels[h] = Math.max(hDef.range[0] * 0.5, Math.min(hDef.range[1] * 1.5, state.hormoneLevels[h]));
         }
       });
-      applyActivity(a, defaultConfig);
+    }
+  } else {
+    // Mettiamo il check: aggiungiamo l'attività (solo se non è già stata registrata oggi da checklist)
+    const alreadyAdded = state.todayActivities.some(a => a.id === actId && a.fromChecklist);
+    if (!alreadyAdded) {
+      state.checklistDone.push(id);
+      const a = ACTIVITIES_DB.find(x => x.id === actId);
+      if (a) {
+        const defaultConfig = {};
+        Object.keys(a.config).forEach(key => {
+          const cfg = a.config[key];
+          if (cfg.type === 'select') {
+            defaultConfig[key] = { type: 'select', value: cfg.options[0].value, mult: cfg.options[0].mult };
+          } else {
+            const def = cfg.default || ((cfg.min + cfg.max) / 2);
+            defaultConfig[key] = { type: 'slider', value: def, mult: 1.0, default: def };
+          }
+        });
+        applyActivity(a, defaultConfig);
+        // Marca l'attività come proveniente da checklist
+        if (state.todayActivities.length > 0) {
+          state.todayActivities[state.todayActivities.length - 1].fromChecklist = true;
+        }
+        saveState();
+        renderChecklist();
+        return;
+      }
+    } else {
+      // Già registrata oggi, togliamo solo il check visivo senza aggiungere di nuovo
+      state.checklistDone.push(id);
     }
   }
   saveState();
   renderChecklist();
+  renderDashboard();
+  renderCritical();
 }
-
 function handleNextAction() {
   const actId = document.getElementById("nextAction").dataset.actId;
   if (actId) openActivityConfig(actId);
@@ -1518,36 +1608,8 @@ function switchProgressTab(tab) {
 function renderProgress() {
   const c = document.getElementById("progressContent");
   if (!c) return;
-  if (state.currentProgressTab === "streak") {
-    const today = new Date();
-    const days = [];
-    for (let i = 27; i >= 0; i--) {
-      const d = new Date(today); d.setDate(d.getDate() - i);
-      days.push({ date: d, active: Math.random() > 0.6 || (i === 0 && state.todayActivities.length > 0) });
-    }
-    const labels = ["L", "M", "M", "G", "V", "S", "D"];
-    c.innerHTML = `
-      <div class="streak-card">
-        <div class="streak-head">
-          <div class="streak-title">🔥 Streak Attuale</div>
-          <div class="streak-count">${state.streak} giorni</div>
-        </div>
-        <div class="streak-day-labels">${labels.map(l => `<div class="streak-day-label">${l}</div>`).join("")}</div>
-        <div class="streak-calendar">${days.map((d, i) => {
-          const isToday = i === days.length - 1;
-          return `<div class="streak-day ${d.active ? 'active' : ''} ${isToday ? 'today' : ''}" title="${d.date.toLocaleDateString('it-IT')}"></div>`;
-        }).join("")}</div>
-      </div>
-      <div class="report-card">
-        <div class="report-head"><div class="report-icon">📊</div><div class="report-title">Statistiche Streak</div></div>
-        <div class="report-stats">
-          <div class="report-stat"><div class="report-stat-value">${state.streak}</div><div class="report-stat-label">Attuale</div></div>
-          <div class="report-stat"><div class="report-stat-value">${Math.max(state.streak, 7)}</div><div class="report-stat-label">Record</div></div>
-          <div class="report-stat"><div class="report-stat-value">${state.todayActivities.length}</div><div class="report-stat-label">Oggi</div></div>
-        </div>
-      </div>
-    `;
-  } else if (state.currentProgressTab === "water") {
+  
+  if (state.currentProgressTab === "water") {
     const pct = Math.min(100, (state.water / 2000) * 100);
     c.innerHTML = `
       <div class="water-card">
@@ -1603,6 +1665,22 @@ function renderProgress() {
       const unlocked = state.unlockedAchievements.includes(a.id);
       return `<div class="achievement ${unlocked ? 'unlocked' : 'locked'}"><div class="achievement-icon">${a.icon}</div><div class="achievement-name">${a.name}</div><div class="achievement-desc">${a.desc}</div></div>`;
     }).join("")}</div>`;
+  } else if (state.currentProgressTab === "storage") {
+    const limit = getPlanLimit();
+    const daysStored = state.history.length + (state.todayActivities.length > 0 ? 1 : 0);
+    const planName = state.plan === 'free' ? 'Free (30 giorni)' : state.plan === 'advanced' ? 'Advanced (90 giorni)' : 'Professional (180 giorni)';
+    c.innerHTML = `
+      <div class="storage-card">
+        <div class="storage-info">
+          <div class="storage-badge">Piano Attuale: ${planName}</div>
+          <div class="storage-text">
+            <strong>${daysStored} giorni</strong> di dati salvati su un massimo di <strong>${limit} giorni</strong>.<br><br>
+            I dati più vecchi vengono rimossi automaticamente per ottimizzare lo spazio. 
+            Passa a un piano superiore per conservare lo storico più a lungo ed esportare report completi.
+          </div>
+        </div>
+      </div>
+    `;
   }
 }
 
@@ -1630,30 +1708,47 @@ function renderReport() {
   const repBest = document.getElementById("repBestDay");
   const compToday = document.getElementById("compToday");
   const compYesterday = document.getElementById("compYesterday");
-  if (repAvg) repAvg.textContent = score;
-  if (repActs) repActs.textContent = state.todayActivities.length;
-  if (repBest) repBest.textContent = score > 60 ? "Oggi" : "--";
+  
+  const recentHistory = state.history.slice(-6);
+  const todayData = { date: new Date().toDateString(), score: score, activitiesCount: state.todayActivities.length };
+  const chartData = [...recentHistory, todayData].slice(-7);
+  
+  const avgScore = chartData.length > 0 ? Math.round(chartData.reduce((sum, d) => sum + (d.score || 0), 0) / chartData.length) : 0;
+  const totalActs = chartData.reduce((sum, d) => sum + (d.activitiesCount || 0), 0);
+  
+  if (repAvg) repAvg.textContent = avgScore;
+  if (repActs) repActs.textContent = totalActs;
+  if (repBest) repBest.textContent = score > 60 ? "Oggi" : (chartData.length > 1 ? "Recente" : "--");
   if (compToday) compToday.textContent = score;
-  if (compYesterday) compYesterday.textContent = "--";
+  if (compYesterday) compYesterday.textContent = recentHistory.length > 0 ? recentHistory[recentHistory.length-1].score : "--";
   
   const chart = document.getElementById("reportChart");
   if (!chart) return;
-  const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Ogg"];
-  const values = [45, 62, 58, 70, 65, 72, score];
+  
+  const daysLabels = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Ogg"];
+  const values = chartData.map(d => d.score || 0);
   const w = 300, h = 140, pad = 20;
   const max = 100;
   const points = values.map((v, i) => {
-    const x = pad + (i / (values.length - 1)) * (w - pad * 2);
+    const x = pad + (i / (values.length - 1 || 1)) * (w - pad * 2);
     const y = h - pad - ((v / max) * (h - pad * 2));
     return `${x},${y}`;
   }).join(" ");
   const areaPoints = `${pad},${h - pad} ${points} ${w - pad},${h - pad}`;
+  
   chart.innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="none">
       <polygon points="${areaPoints}" fill="url(#chartGrad)"/>
       <polyline points="${points}" fill="none" stroke="#3A5F0B" stroke-width="2"/>
-      ${values.map((v, i) => { const x = pad + (i / (values.length - 1)) * (w - pad * 2); const y = h - pad - ((v / max) * (h - pad * 2)); return `<circle cx="${x}" cy="${y}" r="4" fill="#3A5F0B" stroke="#F8FAF9" stroke-width="2"/>`; }).join("")}
-      ${days.map((d, i) => { const x = pad + (i / (days.length - 1)) * (w - pad * 2); return `<text x="${x}" y="${h - 5}" text-anchor="middle" fill="#6B7563" font-size="10" font-weight="600">${d}</text>`; }).join("")}
+      ${values.map((v, i) => { 
+        const x = pad + (i / (values.length - 1 || 1)) * (w - pad * 2); 
+        const y = h - pad - ((v / max) * (h - pad * 2)); 
+        return `<circle cx="${x}" cy="${y}" r="4" fill="#3A5F0B" stroke="#F8FAF9" stroke-width="2"/>`; 
+      }).join("")}
+      ${daysLabels.slice(0, values.length).map((d, i) => { 
+        const x = pad + (i / (values.length - 1 || 1)) * (w - pad * 2); 
+        return `<text x="${x}" y="${h - 5}" text-anchor="middle" fill="#6B7563" font-size="10" font-weight="600">${d}</text>`; 
+      }).join("")}
     </svg>
   `;
   
@@ -1701,6 +1796,7 @@ function activatePlan(p) {
   state.plan = p;
   saveState();
   showToast(`✓ Piano ${p.toUpperCase()} attivato (demo)`, "success");
+  renderPricing();
 }
 
 function setupSearch() {
@@ -1942,14 +2038,28 @@ function resetAll() {
 }
 
 function exportCSV() {
-  if (state.todayActivities.length === 0) { showToast("Nessun dato", "error"); return; }
-  let c = "Orario,Attività,Categoria\n";
-  state.todayActivities.forEach(a => {
-    c += `"${new Date(a.time).toLocaleString("it-IT")}","${a.name}","${a.cat}"\n`;
+  const limit = getPlanLimit();
+  const dataToExport = [...state.history.slice(-limit)];
+  dataToExport.push({
+    date: new Date().toDateString(),
+    score: calculateDailyScore(),
+    activitiesCount: state.todayActivities.length,
+    water: state.water,
+    weight: state.profile.weight,
+    activities: state.todayActivities
   });
-  const b = new Blob([c], { type: "text/csv" });
-  const u = URL.createObjectURL(b);
-  const x = document.createElement("a"); x.href = u; x.download = `hormones-${new Date().toISOString().slice(0, 10)}.csv`; x.click();
+  
+  let csv = "Data,Score,Attività,Acqua (ml),Peso (kg)\n";
+  dataToExport.forEach(d => {
+    csv += `"${d.date}",${d.score},${d.activitiesCount},${d.water},${d.weight}\n`;
+  });
+  
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const x = document.createElement("a"); 
+  x.href = url; 
+  x.download = `elite-hormone-export-${new Date().toISOString().slice(0, 10)}.csv`; 
+  x.click();
   showToast("✓ CSV scaricato", "success");
 }
 
