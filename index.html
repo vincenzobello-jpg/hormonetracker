@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#3A5F0B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="EliteFit">
-<meta name="description" content="Elite Hormone Dynamics - Monitoraggio ormoni, gym e benessere">
-<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"Elite Hormone Dynamics","short_name":"EliteFit","start_url":"/","display":"standalone","background_color":"#F8FAF9","theme_color":"#3A5F0B","icons":[{"src":"data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><rect width=%22192%22 height=%22192%22 rx=%2240%22 fill=%22%233A5F0B%22/><text x=%2296%22 y=%22130%22 font-size=%22110%22 text-anchor=%22middle%22 fill=%22%23fff%22 font-family=%22Arial%22 font-weight=%22bold%22>E</text></svg>","sizes":"192x192","type":"image/svg+xml"}]}'>
-<title>Elite Hormone Dynamics — Elite Fit Training</title>
+<meta name="apple-mobile-web-app-title" content="Elite Fit Training">
+<meta name="description" content="Elite Fit Training - Monitoraggio ormoni, gym e benessere">
+<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"Elite Fit Training","short_name":"Elite Fit Training","start_url":"/","display":"standalone","background_color":"#F8FAF9","theme_color":"#3A5F0B","icons":[{"src":"data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><rect width=%22192%22 height=%22192%22 rx=%2240%22 fill=%22%233A5F0B%22/><text x=%2296%22 y=%22130%22 font-size=%22110%22 text-anchor=%22middle%22 fill=%22%23fff%22 font-family=%22Arial%22 font-weight=%22bold%22>E</text></svg>","sizes":"192x192","type":"image/svg+xml"}]}'>
+<title>Elite Fit Training</title>
 <style>
 :root {
 --brand-green: #3A5F0B;
@@ -48,10 +48,7 @@ body { padding-bottom: 90px; }
 button, input, select { font-family: inherit; border: none; background: none; color: inherit; outline: none; font-size: 16px; }
 button { cursor: pointer; }
 a { text-decoration: none; color: inherit; }
-
-/* FIX: Container con padding di sicurezza e overflow bloccato */
 .app-container { width: 100%; max-width: 1400px; margin: 0 auto; overflow-x: hidden; }
-
 .sidebar {
 display: none; background: var(--bg2); border-right: 1px solid var(--border);
 padding: 24px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto;
@@ -72,8 +69,6 @@ cursor: pointer; color: var(--text2); font-size: 15px; font-weight: 600; transit
 .sidebar-item:hover { background: var(--bg3); color: var(--text); }
 .sidebar-item.active { background: var(--grad); color: #fff; box-shadow: 0 4px 12px rgba(58,95,11,0.2); }
 .sidebar-icon { font-size: 20px; min-width: 24px; text-align: center; }
-
-/* FIX: Header con padding laterale aumentato per non toccare i bordi */
 .header {
 position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.98);
 backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
@@ -98,8 +93,6 @@ font-size: 20px; transition: all 0.2s; position: relative;
 .icon-btn:active { transform: scale(0.95); }
 .icon-btn.danger { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.25); color: var(--danger); }
 .icon-btn.danger:hover { background: rgba(239,68,68,0.18); }
-
-/* FIX: Main con padding laterale di 20px (invece di 16px) per effetto "sempre un po' meno" */
 .main { padding: 24px 20px; max-width: 800px; margin: 0 auto; width: 100%; }
 .section { margin-bottom: 24px; }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 8px; }
@@ -130,11 +123,12 @@ font-size: 26px; font-weight: 900; color: var(--brand-green);
 .score-info { flex: 1; min-width: 0; }
 .score-info h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
 .score-info p { font-size: 12px; color: var(--text3); line-height: 1.4; }
-.score-breakdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
-.score-break-item { text-align: center; padding: 8px 4px; background: var(--bg3); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+/* FIX 1: Score breakdown responsive - 2 colonne su mobile, 4 su desktop */
+.score-breakdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; width: 100%; }
+.score-break-item { text-align: center; padding: 8px 4px; background: var(--bg3); border-radius: var(--radius-sm); border: 1px solid var(--border); min-width: 0; overflow: hidden; }
 .score-break-icon { font-size: 16px; margin-bottom: 3px; }
 .score-break-val { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
-.score-break-label { font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.score-break-label { font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; word-wrap: break-word; }
 .next-action {
 background: linear-gradient(135deg, rgba(58,95,11,0.1) 0%, rgba(212,175,55,0.06) 100%);
 border: 2px solid rgba(58,95,11,0.25); border-radius: var(--radius); padding: 16px;
@@ -153,19 +147,20 @@ box-shadow: 0 4px 16px rgba(58,95,11,0.3);
 .next-action-title { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
 .next-action-desc { font-size: 12px; color: var(--text3); line-height: 1.3; }
 .next-action-arrow { font-size: 20px; color: var(--brand-green); font-weight: 700; flex-shrink: 0; }
+/* FIX 3: Crit grid responsive - 1 colonna su mobile stretto, 2 su tablet, 3 su desktop */
 .crit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
 .crit-card {
 background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm);
-padding: 12px; transition: all 0.3s; cursor: pointer; width: 100%;
+padding: 12px; transition: all 0.3s; cursor: pointer; width: 100%; min-width: 0; overflow: hidden;
 }
 .crit-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: var(--shadow); }
 .crit-card.high, .crit-card.critical { border-color: rgba(239,68,68,0.5); background: linear-gradient(135deg, rgba(239,68,68,0.08), var(--bg2)); }
 .crit-card.low, .crit-card.warning { border-color: rgba(245,158,11,0.5); background: linear-gradient(135deg, rgba(245,158,11,0.08), var(--bg2)); }
 .crit-card.optimal { border-color: rgba(34,197,94,0.4); background: linear-gradient(135deg, rgba(34,197,94,0.06), var(--bg2)); }
-.crit-head { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-.crit-icon { font-size: 18px; }
-.crit-name { font-size: 11px; font-weight: 700; flex: 1; }
-.crit-status { font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.crit-head { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; min-width: 0; overflow: hidden; }
+.crit-icon { font-size: 18px; flex-shrink: 0; }
+.crit-name { font-size: 11px; font-weight: 700; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crit-status { font-size: 8px; padding: 2px 6px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
 .crit-status.high, .crit-status.critical { background: rgba(239,68,68,0.2); color: var(--danger); }
 .crit-status.low, .crit-status.warning { background: rgba(245,158,11,0.2); color: var(--warning); }
 .crit-status.optimal { background: rgba(34,197,94,0.2); color: var(--success); }
@@ -364,8 +359,6 @@ font-weight: 800; font-size: 13px; display: inline-block; position: relative; tr
 .btn-danger { background: rgba(239,68,68,0.1); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
 .btn-danger:hover { background: rgba(239,68,68,0.18); }
 .btn-gold { background: var(--grad-gold); color: #1A1F16; font-weight: 800; }
-
-/* FIX: Bottom nav con padding laterale per staccarla dai bordi */
 .bottom-nav {
 position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.98);
 backdrop-filter: blur(20px); border-top: 1px solid var(--border);
@@ -377,13 +370,11 @@ width: 100%; max-width: 100%;
 .nav-item.active { color: var(--brand-green); }
 .nav-icon { font-size: 20px; }
 .nav-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-
-/* FIX: Modale con larghezza calc(100% - 32px) per non toccare i bordi */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 200; display: none; align-items: flex-end; justify-content: center; }
 .modal-overlay.active { display: flex; }
-.modal { 
-background: var(--bg2); border-radius: 24px 24px 0 0; 
-width: calc(100% - 32px); max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 20px; 
+.modal {
+background: var(--bg2); border-radius: 24px 24px 0 0;
+width: calc(100% - 32px); max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 20px;
 animation: slideUp 0.3s ease; margin-bottom: env(safe-area-inset-bottom);
 }
 @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
@@ -438,15 +429,10 @@ max-width: calc(100% - 40px); text-align: center;
 .hidden { display: none !important; }
 .divider { height: 1px; background: var(--border); margin: 14px 0; }
 .mt-12 { margin-top: 12px; }
-.quick-add-row { display: flex; gap: 10px; overflow-x: auto; padding: 8px 4px; scrollbar-width: none; width: 100%; margin-bottom: 16px; }
-.quick-add-row::-webkit-scrollbar { display: none; }
-.quick-add-btn { flex: 0 0 auto; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 10px; min-width: 80px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.quick-add-btn:active { transform: scale(0.95); background: var(--accent); color: white; border-color: var(--accent); }
 .progress-badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 16px; font-weight: 700; font-size: 12px; }
 .status-good { background: rgba(16, 185, 129, 0.15); color: #10b981; }
 .status-warn { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
 .status-crit { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-
 /* GYM LOG STYLES */
 .gym-header { background: var(--grad); border-radius: var(--radius-lg); padding: 20px; color: #fff; margin-bottom: 16px; box-shadow: var(--shadow-lg); width: 100%; }
 .gym-header-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; letter-spacing: -0.5px; }
@@ -490,7 +476,6 @@ max-width: calc(100% - 40px); text-align: center;
 .history-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 8px; width: 100%; }
 .history-date { font-size: 10px; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .history-exercises { font-size: 11px; color: var(--text2); }
-
 .split-selection { background: var(--bg2); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; width: 100%; }
 .split-title { font-size: 14px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
 .split-subtitle { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
@@ -547,15 +532,16 @@ max-width: calc(100% - 40px); text-align: center;
 .active-workout-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); width: 100%; }
 .active-workout-name { font-size: 16px; font-weight: 800; }
 .active-workout-timer { font-size: 13px; font-weight: 700; color: var(--brand-green); font-variant-numeric: tabular-nums; }
-
-/* Responsive adjustments for "always a little less" feel */
-@media (max-width: 380px) {
-    .main { padding: 20px 16px; }
-    .score-breakdown { grid-template-columns: repeat(2, 1fr); }
-    .split-options { grid-template-columns: repeat(3, 1fr); }
-    .coaching-features { grid-template-columns: 1fr; }
+/* Responsive adjustments */
+@media (max-width: 480px) {
+.score-breakdown { grid-template-columns: repeat(2, 1fr); }
 }
-
+@media (max-width: 380px) {
+.main { padding: 20px 16px; }
+.crit-grid { grid-template-columns: 1fr; }
+.split-options { grid-template-columns: repeat(3, 1fr); }
+.coaching-features { grid-template-columns: 1fr; }
+}
 @media (min-width: 768px) {
 .main { padding: 28px 24px; }
 .activity-list { grid-template-columns: repeat(2, 1fr); }
@@ -587,7 +573,6 @@ body { padding-bottom: 0; }
 </linearGradient>
 </defs>
 </svg>
-
 <!-- ONBOARDING -->
 <div class="onboarding" id="onboarding">
 <div class="onb-progress">
@@ -647,7 +632,6 @@ body { padding-bottom: 0; }
 <button class="btn btn-primary" onclick="finishOnb()">Inizia il Tracking ✨</button>
 </div>
 </div>
-
 <div class="app-container">
 <aside class="sidebar">
 <div class="sidebar-logo">
@@ -667,14 +651,13 @@ body { padding-bottom: 0; }
 <div class="sidebar-item" onclick="openProfile()"><span class="sidebar-icon">⚙️</span>Profilo</div>
 </nav>
 </aside>
-
 <div class="main-content">
 <header class="header">
 <div class="logo">
 <div class="logo-icon">⚗️</div>
 <div>
-<div class="logo-text">EliteFit</div>
-<div class="logo-sub">Hormone Dynamics</div>
+<div class="logo-text">Elite Fit Training</div>
+<div class="logo-sub">Health tracker</div>
 </div>
 </div>
 <div class="header-actions">
@@ -682,15 +665,13 @@ body { padding-bottom: 0; }
 <button class="icon-btn" onclick="openProfile()" title="Profilo">⚙️</button>
 </div>
 </header>
-
 <main class="main">
 <!-- DASHBOARD -->
 <div id="view-dashboard">
 <div class="greeting">
 <div class="greeting-hello" id="greetHello">Buongiorno</div>
-<div class="greeting-name" id="greetName">Pronto a ottimizzare i tuoi ormoni? 💪</div>
+<div class="greeting-name" id="greetName">Raggiungi il tuo massimo potenziale</div>
 </div>
-
 <div class="score-card">
 <div class="score-ring">
 <svg viewBox="0 0 100 100">
@@ -710,9 +691,7 @@ body { padding-bottom: 0; }
 </div>
 </div>
 </div>
-
 <div class="section" style="margin-top: 20px;">
-<div class="quick-add-row" id="quickAddRow"></div>
 <div class="next-action" id="nextAction" onclick="handleNextAction()">
 <div class="next-action-icon" id="nextIcon">💡</div>
 <div class="next-action-info">
@@ -723,7 +702,6 @@ body { padding-bottom: 0; }
 <div class="next-action-arrow">→</div>
 </div>
 </div>
-
 <div class="section">
 <div class="section-header">
 <div class="section-title">✅ Checklist Giornaliera</div>
@@ -733,7 +711,6 @@ body { padding-bottom: 0; }
 <div class="checklist-items" id="checklistItems"></div>
 </div>
 </div>
-
 <div class="section">
 <div class="section-header">
 <div class="section-title">🧬 Ormoni Critici</div>
@@ -741,7 +718,6 @@ body { padding-bottom: 0; }
 <div class="crit-grid" id="critList"></div>
 </div>
 </div>
-
 <!-- TRACKER -->
 <div id="view-tracker" class="hidden">
 <div class="section">
@@ -762,14 +738,12 @@ body { padding-bottom: 0; }
 </div>
 </div>
 </div>
-
 <!-- GYM LOG -->
 <div id="view-gymlog" class="hidden">
 <div class="gym-header">
 <div class="gym-header-title">🏋️ Gym Log</div>
-<div class="gym-header-sub">Crea le tue schede e allena con metodo</div>
+<div class="gym-header-sub">Crea le tue schede e allenati</div>
 </div>
-
 <div id="splitSelection" class="split-selection">
 <div class="split-title">Quanti giorni ti alleni a settimana?</div>
 <div class="split-subtitle">Scegli la frequenza per creare la tua split personalizzata</div>
@@ -783,7 +757,6 @@ body { padding-bottom: 0; }
 <div class="split-title" style="margin-top:12px;">Scegli la tua split</div>
 <div class="split-presets" id="splitPresets"></div>
 </div>
-
 <div id="templatesSection" style="display:none;">
 <div class="templates-header">
 <div class="templates-title">📋 Le Tue Schede</div>
@@ -791,7 +764,6 @@ body { padding-bottom: 0; }
 </div>
 <div class="templates-list" id="templatesList"></div>
 </div>
-
 <div id="templateEditor" style="display:none;">
 <div class="template-editor">
 <div class="template-editor-header">
@@ -804,7 +776,6 @@ body { padding-bottom: 0; }
 <button class="save-template-btn" onclick="saveTemplate()">💾 Salva Scheda</button>
 </div>
 </div>
-
 <div id="exercisePicker" style="display:none;">
 <div class="exercise-select">
 <div class="exercise-select-title">Scegli Esercizio</div>
@@ -813,7 +784,6 @@ body { padding-bottom: 0; }
 <button class="btn btn-secondary" style="margin-top:12px;" onclick="closeExercisePicker()">Annulla</button>
 </div>
 </div>
-
 <div id="activeWorkout" style="display:none;">
 <div class="workout-card active">
 <div class="active-workout-header">
@@ -824,13 +794,11 @@ body { padding-bottom: 0; }
 <button class="finish-workout-btn" onclick="finishWorkout()">✓ Termina Workout</button>
 </div>
 </div>
-
 <div class="workout-history" id="workoutHistory">
 <div class="section-title" style="margin-bottom:12px;">📊 Storico Workout</div>
 <div id="historyList"></div>
 </div>
 </div>
-
 <!-- PROGRESS -->
 <div id="view-progress" class="hidden">
 <div class="section">
@@ -844,7 +812,6 @@ body { padding-bottom: 0; }
 <div id="progressContent"></div>
 </div>
 </div>
-
 <!-- SOLUTIONS -->
 <div id="view-solutions" class="hidden">
 <div class="solutions-hero">
@@ -888,7 +855,6 @@ body { padding-bottom: 0; }
 </main>
 </div>
 </div>
-
 <nav class="bottom-nav">
 <div class="nav-item active" data-view="dashboard"><div class="nav-icon">📊</div><div class="nav-label">Home</div></div>
 <div class="nav-item" data-view="tracker"><div class="nav-icon">➕</div><div class="nav-label">Tracker</div></div>
@@ -896,7 +862,6 @@ body { padding-bottom: 0; }
 <div class="nav-item" data-view="progress"><div class="nav-icon">📈</div><div class="nav-label">Progresso</div></div>
 <div class="nav-item" data-view="solutions"><div class="nav-icon">💎</div><div class="nav-label">Piani</div></div>
 </nav>
-
 <div class="modal-overlay" id="configModal">
 <div class="modal">
 <div class="modal-header">
@@ -906,7 +871,6 @@ body { padding-bottom: 0; }
 <div id="configContent"></div>
 </div>
 </div>
-
 <div class="modal-overlay" id="profileModal">
 <div class="modal">
 <div class="modal-header">
@@ -948,17 +912,14 @@ body { padding-bottom: 0; }
 <button class="btn btn-danger" style="margin-top:10px;" onclick="resetAll()">🔄 Azzera Dati Oggi</button>
 </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
 function sanitize(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-    });
+if (typeof str !== 'string') return str;
+return str.replace(/[&<>"']/g, function(m) {
+return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+});
 }
-
 const HORMONES_DB = {
 cortisol: { name: "Cortisolo", icon: "⚡", color: "#EF4444", cat: "stress", range: [5, 25], baseline: 14, desc: "Stress" },
 adrenaline: { name: "Adrenalina", icon: "🔥", color: "#F97316", cat: "stress", range: [0, 110], baseline: 40, desc: "Energia" },
@@ -987,7 +948,6 @@ vitD: { name: "Vitamina D", icon: "🌞", color: "#F97316", cat: "other", range:
 bdnf: { name: "BDNF", icon: "🧬", color: "#5B21B6", cat: "other", range: [5, 50], baseline: 20, desc: "Cervello" },
 npy: { name: "NPY", icon: "🧠", color: "#3B82F6", cat: "other", range: [50, 300], baseline: 150, desc: "Ansia" }
 };
-
 const ACTIVITIES_DB = [
 { id: "run", name: "Corsa", emoji: "🏃", cat: "esercizio", desc: "Cardio ad alta intensità", config: { duration: { type: 'slider', label: 'Durata', min: 10, max: 120, step: 5, default: 30, unit: 'min' } }, effects: { cortisol: 15, adrenaline: 40, endorphins: 50, dopamine: 25, gh: 40, testosterone: 20 } },
 { id: "weights", name: "Pesi", emoji: "🏋️", cat: "esercizio", desc: "Allenamento di forza", config: { duration: { type: 'slider', label: 'Durata', min: 15, max: 120, step: 5, default: 45, unit: 'min' } }, effects: { testosterone: 35, gh: 45, igf1: 20, cortisol: 20 } },
@@ -998,7 +958,6 @@ const ACTIVITIES_DB = [
 { id: "sleep", name: "Sonno", emoji: "😴", cat: "sonno", desc: "Riposo notturno", config: { hours: { type: 'select', label: 'Ore', options: [{label:'6h', value:6, mult:0.8}, {label:'7h', value:7, mult:1.0}, {label:'8h', value:8, mult:1.2}] } }, effects: { gh: 60, melatonin: 50, gaba: 30, cortisol: -30 } },
 { id: "meditation", name: "Meditazione", emoji: "🧘‍♂️", cat: "recupero", desc: "Mindfulness", config: { duration: { type: 'slider', label: 'Durata', min: 5, max: 60, step: 5, default: 15, unit: 'min' } }, effects: { cortisol: -30, gaba: 35, serotonin: 20 } }
 ];
-
 const GYM_EXERCISES = {
 chest: [
 { id: 'bench_press', name: 'Panca Piana', muscle: 'Petto', equipment: 'Bilanciere' },
@@ -1046,7 +1005,6 @@ core: [
 { id: 'cable_crunch', name: 'Cable Crunch', muscle: 'Addome', equipment: 'Cavi' }
 ]
 };
-
 const CATEGORIES = [
 { id: "all", name: "Tutte", emoji: "🔥" },
 { id: "esercizio", name: "Esercizio", emoji: "💪" },
@@ -1059,7 +1017,6 @@ const CATEGORIES = [
 { id: "mentale", name: "Mentale", emoji: "🧠" },
 { id: "vizi", name: "Vizi", emoji: "⚠️" }
 ];
-
 const CHECKLIST = [
 { id: "water", icon: "💧", text: "Bevi 2L d'acqua", actId: "water", count: 4 },
 { id: "sun", icon: "🌅", text: "Luce solare al mattino", actId: "sunrise" },
@@ -1067,7 +1024,6 @@ const CHECKLIST = [
 { id: "veg", icon: "🥗", text: "Pasto vegetale", actId: "veg" },
 { id: "sleep", icon: "😴", text: "Niente schermi prima di dormire", actId: "noScreen" }
 ];
-
 const PRICING = {
 monthly: {
 free: { name: "Free", price: 0, period: "/mese", desc: "Funzioni essenziali", features: ["10 attività/giorno", "26 ormoni monitorati", "Report giornaliero", "3 azioni pratiche", "Storico 30 giorni"] },
@@ -1080,7 +1036,6 @@ advanced: { name: "Advanced", price: 94.99, period: "/anno", featured: true, sav
 professional: { name: "Professional", price: 286.99, period: "/anno", save: "20%", desc: "Protocollo completo", features: ["Tutto di Advanced", "Report PDF settimanali", "Piani personalizzati", "Export professionale", "Supporto prioritario", "Storico 180 giorni"] }
 }
 };
-
 const bodyTypes = {
 M: [
 { id: 'very_lean', name: 'Molto magro', icon: '🧍‍♂️' },
@@ -1097,7 +1052,6 @@ F: [
 { id: 'overweight', name: 'Robusta', icon: '👩' }
 ]
 };
-
 const ACHIEVEMENTS = [
 { id: "first", icon: "🎯", name: "Primo Passo", desc: "Registra 1 attività", req: 1 },
 { id: "five", icon: "⭐", name: "Cinque Stelle", desc: "5 attività in un giorno", req: 5 },
@@ -1106,7 +1060,6 @@ const ACHIEVEMENTS = [
 { id: "streak7", icon: "💎", name: "Una Settimana", desc: "7 giorni consecutivi", reqStreak: 7 },
 { id: "streak30", icon: "👑", name: "Un Mese", desc: "30 giorni consecutivi", reqStreak: 30 }
 ];
-
 let state = {
 profile: { age: 30, sex: "F", weight: 65, height: 168, bodyType: "normal", goals: ["wellness"], experience: "beginner" },
 hormoneLevels: {},
@@ -1135,76 +1088,14 @@ history: [],
 unlockedAchievements: [],
 lastActivityDate: new Date().toDateString()
 };
-
 let onbStep = 1, onbGoals = [];
 let selectedSex = 'F';
 let selectedBodyType = 'normal';
-
 function getPlanLimit() {
 if (state.plan === 'professional') return 180;
 if (state.plan === 'advanced') return 90;
 return 30;
 }
-
-function updateQuickAddByGoal() {
-const container = document.getElementById('quickAddRow');
-if (!container) return;
-const goals = state.profile.goals || ['wellness'];
-const experience = state.profile.experience || 'beginner';
-let recommended = [];
-const goalMap = {
-'weight-loss': ['walk', 'water', 'fasting', 'veg', 'hiit'],
-'muscle': ['weights', 'protein', 'sleep', 'stretch', 'omega3'],
-'sleep': ['noScreen', 'magnesium', 'meditation', 'sleep', 'breathwork'],
-'stress': ['meditation', 'breathwork', 'nature', 'yoga', 'magnesium'],
-'performance': ['run', 'carb', 'stretch', 'omega3', 'coldShower'],
-'wellness': ['sunrise', 'water', 'walk', 'meditation', 'protein']
-};
-const intensityFilter = {
-'beginner': ['walk', 'yoga', 'stretch', 'meditation', 'water', 'sunrise', 'protein', 'veg', 'breathwork', 'nature'],
-'intermediate': ['run', 'weights', 'hiit', 'protein', 'fasting', 'swim', 'pilates', 'yoga'],
-'advanced': ['hiit', 'weights', 'coldShower', 'fasting', 'run', 'swim']
-};
-goals.forEach(g => {
-if(goalMap[g]) {
-const activities = experience === 'beginner'
-? goalMap[g].filter(a => intensityFilter.beginner.includes(a))
-: (experience === 'advanced' ? goalMap[g].filter(a => intensityFilter.advanced.includes(a)) : goalMap[g]);
-recommended = [...recommended, ...activities];
-}
-});
-const uniqueRecs = [...new Set(recommended)].slice(0, 4);
-if (uniqueRecs.length === 0) {
-container.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px;">Nessuna azione consigliata per ora</div>';
-return;
-}
-container.innerHTML = uniqueRecs.map(id => {
-const act = ACTIVITIES_DB.find(a => a.id === id);
-if(!act) return '';
-return `<div class="quick-add-btn" onclick="quickRegister('${act.id}')">
-<div style="font-size: 28px;">${act.emoji}</div>
-<div style="font-size: 11px; font-weight: 700; margin-top: 6px;">${act.name}</div>
-</div>`;
-}).join('');
-}
-
-function quickRegister(actId) {
-const act = ACTIVITIES_DB.find(a => a.id === actId);
-if (!act) return;
-const defaultConfig = {};
-Object.keys(act.config || {}).forEach(key => {
-const cfg = act.config[key];
-if (cfg.type === 'select') {
-defaultConfig[key] = { type: 'select', value: cfg.options[0].value, mult: cfg.options[0].mult };
-} else {
-const def = cfg.default || ((cfg.min + cfg.max) / 2);
-defaultConfig[key] = { type: 'slider', value: def, mult: 1.0, default: def };
-}
-});
-applyActivity(act, defaultConfig);
-showToast(`✓ ${act.name} registrata in 1 secondo!`, 'success');
-}
-
 function init() {
 loadState();
 checkDateReset();
@@ -1220,15 +1111,13 @@ setInterval(updateTime, 60000);
 setupNav();
 setupSearch();
 setupOnboarding();
-
 document.getElementById("trackerContent").addEventListener("click", (e) => {
-    const item = e.target.closest(".activity-item");
-    if (item) {
-        openActivityConfig(item.dataset.id);
-    }
+const item = e.target.closest(".activity-item");
+if (item) {
+openActivityConfig(item.dataset.id);
+}
 });
 }
-
 function checkDateReset() {
 const today = new Date().toDateString();
 if (state.lastActivityDate !== today && state.lastActivityDate !== "") {
@@ -1257,7 +1146,6 @@ state.hormoneLevels[k] = HORMONES_DB[k].baseline;
 saveState();
 }
 }
-
 function loadState() {
 const s = localStorage.getItem("ehd_v9_state");
 if (s) {
@@ -1268,7 +1156,6 @@ console.error("Errore caricamento stato:", e);
 }
 }
 }
-
 function saveState() {
 try {
 localStorage.setItem("ehd_v9_state", JSON.stringify(state));
@@ -1277,7 +1164,6 @@ console.error("Errore salvataggio stato:", e);
 showToast("⚠️ Spazio di archiviazione pieno", "error");
 }
 }
-
 function applyActivity(act, configValues) {
 let totalMult = 1;
 Object.values(configValues).forEach(cv => {
@@ -1315,7 +1201,6 @@ saveState();
 renderAll();
 showToast(`✓ ${act.name} registrata`, "success");
 }
-
 function applySynergies(m) {
 if (state.hormoneLevels.cortisol > HORMONES_DB.cortisol.baseline * 1.3) {
 state.hormoneLevels.testosterone -= 3 * m;
@@ -1333,7 +1218,6 @@ state.hormoneLevels.gh += 2 * m;
 state.hormoneLevels.cortisol -= 2 * m;
 }
 }
-
 function checkAchievements() {
 ACHIEVEMENTS.forEach(a => {
 if (state.unlockedAchievements.includes(a.id)) return;
@@ -1346,7 +1230,6 @@ showToast(`🏆 Badge sbloccato: ${a.name}!`, "success");
 }
 });
 }
-
 function calculateDailyScore() {
 if (state.todayActivities.length === 0) return 0;
 let s = 50;
@@ -1363,7 +1246,6 @@ s -= Math.max(0, Math.min(1, r)) * 2;
 s += Math.min(state.todayActivities.length * 2, 15);
 return Math.max(0, Math.min(100, Math.round(s)));
 }
-
 function getCategoryScore(cat) {
 const acts = state.todayActivities.filter(a => a.cat === cat);
 if (acts.length === 0) return 0;
@@ -1377,7 +1259,6 @@ s += Math.max(0, pos - neg) * 5;
 });
 return Math.min(100, Math.round(s));
 }
-
 function renderAll() {
 renderDashboard();
 renderCategories();
@@ -1389,7 +1270,6 @@ renderPricing();
 renderGymView();
 updateNextAction();
 }
-
 function renderDashboard() {
 const s = calculateDailyScore();
 document.getElementById("dailyScore").textContent = s;
@@ -1405,9 +1285,7 @@ document.getElementById("brkExercise").textContent = getCategoryScore("esercizio
 document.getElementById("brkNutrition").textContent = getCategoryScore("nutrizione");
 document.getElementById("brkSleep").textContent = getCategoryScore("sonno");
 document.getElementById("brkRecovery").textContent = getCategoryScore("recupero");
-updateQuickAddByGoal();
 }
-
 function getHealthStatus(key, pct) {
 const ideals = {
 cortisol: 20, insulin: 20, ghrelin: 20, aldosterone: 20, npy: 20,
@@ -1424,7 +1302,6 @@ if (healthPct < 50) { color = '#EF4444'; label = 'Critico'; status = 'critical';
 else if (healthPct < 75) { color = '#F59E0B'; label = 'Attenzione'; status = 'warning'; }
 return { color, label, status, healthPct };
 }
-
 function renderCritical() {
 const list = document.getElementById("critList");
 if (!list) return;
@@ -1446,12 +1323,12 @@ return `<div class="crit-card ${health.status}">
 <div class="crit-name">${h.name}</div>
 <div class="crit-status" style="background:${health.color}20; color:${health.color}">${health.label}</div>
 </div>
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
-<div>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; min-width:0; overflow:hidden;">
+<div style="min-width:0; flex:1; overflow:hidden;">
 <div class="crit-value" style="color:${health.color}">${v.toFixed(1)}</div>
 <div class="crit-trend" style="color:${health.color}">${t} ${dp > 0 ? '+' : ''}${dp}% vs baseline</div>
 </div>
-<svg width="50" height="50" viewBox="0 0 50 50" style="transform: rotate(-90deg);">
+<svg width="50" height="50" viewBox="0 0 50 50" style="transform: rotate(-90deg); flex-shrink:0;">
 <circle cx="25" cy="25" r="${radius}" fill="none" stroke="#E2E8E4" stroke-width="5"/>
 <circle cx="25" cy="25" r="${radius}" fill="none" stroke="${health.color}" stroke-width="5"
 stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"
@@ -1461,7 +1338,6 @@ style="transition: stroke-dashoffset 0.5s ease;"/>
 </div>`;
 }).join("");
 }
-
 function updateNextAction() {
 const h = new Date().getHours();
 const icon = document.getElementById("nextIcon");
@@ -1485,7 +1361,6 @@ title.textContent = ti;
 desc.textContent = de;
 action.dataset.actId = actId || "";
 }
-
 function renderChecklist() {
 const list = document.getElementById("checklistItems");
 if (!list) return;
@@ -1500,7 +1375,6 @@ return `<div class="check-item ${done ? 'done' : ''}" onclick="toggleCheck('${c.
 }).join("");
 document.getElementById("checkCount").textContent = `${state.checklistDone.length}/${CHECKLIST.length}`;
 }
-
 function toggleCheck(id, actId) {
 if (state.checklistDone.includes(id)) {
 state.checklistDone = state.checklistDone.filter(x => x !== id);
@@ -1553,13 +1427,11 @@ renderChecklist();
 renderDashboard();
 renderCritical();
 }
-
 function handleNextAction() {
 const actId = document.getElementById("nextAction").dataset.actId;
 if (actId) openActivityConfig(actId);
 else switchView("tracker");
 }
-
 function renderCategories() {
 const t = document.getElementById("categoryTabs");
 if (!t) return;
@@ -1570,13 +1442,11 @@ renderCategories();
 renderActivities();
 }));
 }
-
 function switchTrackerTab(tab) {
 state.currentTrackerTab = tab;
 document.querySelectorAll(".tracker-tab").forEach(t => t.classList.toggle("active", t.dataset.ttab === tab));
 renderActivities();
 }
-
 function renderActivities() {
 const content = document.getElementById("trackerContent");
 if (!content) return;
@@ -1603,7 +1473,6 @@ renderCategories();
 renderActivityList();
 }
 }
-
 function renderActivityList() {
 const list = document.getElementById("activityList");
 if (!list) return;
@@ -1619,7 +1488,6 @@ return;
 }
 list.innerHTML = f.map(a => renderActivityItem(a)).join("");
 }
-
 function renderActivityItem(a) {
 const ef = Object.entries(a.effects || {}).slice(0, 4).map(([h, v]) => {
 const n = HORMONES_DB[h]?.name.split(" ")[0] || h;
@@ -1639,13 +1507,11 @@ ${configCount > 0 ? `<div class="activity-meta">${configCount} opzioni personali
 <div class="activity-effects">${ef}</div>
 </div>`;
 }
-
 function switchProgressTab(tab) {
 state.currentProgressTab = tab;
 document.querySelectorAll(".progress-tab").forEach(t => t.classList.toggle("active", t.dataset.ptab === tab));
 renderProgress();
 }
-
 function renderProgress() {
 const c = document.getElementById("progressContent");
 if (!c) return;
@@ -1725,14 +1591,12 @@ Passa a un piano superiore per conservare lo storico più a lungo.
 `;
 }
 }
-
 function addWater(ml) {
 state.water += ml;
 saveState();
 renderProgress();
 showToast(`✓ +${ml}ml di acqua`, "success");
 }
-
 function addWeight() {
 const v = parseFloat(document.getElementById("newWeight").value);
 if (!v || v < 30 || v > 250) return;
@@ -1742,7 +1606,6 @@ saveState();
 renderProgress();
 showToast("✓ Peso registrato", "success");
 }
-
 function renderPricing() {
 const grid = document.getElementById("pricingGrid");
 if (!grid) return;
@@ -1766,20 +1629,17 @@ ${btn}
 </div>`;
 }).join("");
 }
-
 function switchPricing(p) {
 state.pricingPeriod = p;
 document.querySelectorAll(".pricing-toggle-btn").forEach(b => b.classList.toggle("active", b.dataset.period === p));
 renderPricing();
 }
-
 function activatePlan(p) {
 state.plan = p;
 saveState();
 showToast(`✓ Piano ${p.toUpperCase()} attivato (demo)`, "success");
 renderPricing();
 }
-
 function setupSearch() {
 const search = document.getElementById("activitySearch");
 if (search) {
@@ -1789,7 +1649,6 @@ renderActivities();
 });
 }
 }
-
 function openActivityConfig(id) {
 const a = ACTIVITIES_DB.find(x => x.id === id);
 if (!a) return;
@@ -1851,13 +1710,11 @@ closeModal("configModal");
 });
 document.getElementById("configModal").classList.add("active");
 }
-
 function setupNav() {
 document.querySelectorAll("[data-view]").forEach(i => {
 i.addEventListener("click", () => switchView(i.dataset.view));
 });
 }
-
 function switchView(v) {
 document.querySelectorAll(".sidebar-item").forEach(n => n.classList.remove("active"));
 document.querySelectorAll(`.sidebar-item[data-view="${v}"]`).forEach(n => n.classList.add("active"));
@@ -1874,24 +1731,20 @@ if (v === "progress") renderProgress();
 if (v === "solutions") renderPricing();
 window.scrollTo(0, 0);
 }
-
 function closeModal(id) {
 document.getElementById(id).classList.remove("active");
 }
-
 function showToast(m, t) {
 const x = document.getElementById("toast");
 x.textContent = m;
 x.className = `toast show ${t || ""}`;
 setTimeout(() => x.classList.remove("show"), 2500);
 }
-
 document.querySelectorAll(".modal-overlay").forEach(m => {
 m.addEventListener("click", e => {
 if (e.target === m) m.classList.remove("active");
 });
 });
-
 function updateTime() {
 const n = new Date();
 const h = n.getHours();
@@ -1899,7 +1752,6 @@ const greet = h < 12 ? "Buongiorno" : h < 18 ? "Buon pomeriggio" : "Buonasera";
 const gh = document.getElementById("greetHello");
 if (gh) gh.textContent = greet;
 }
-
 function setupOnboarding() {
 document.querySelectorAll(".onb-card").forEach(g => {
 g.addEventListener("click", () => {
@@ -1910,7 +1762,6 @@ else onbGoals.push(id);
 });
 });
 }
-
 function selectSex(sex) {
 selectedSex = sex;
 document.querySelectorAll('#sexSelection .option-btn').forEach(btn => {
@@ -1918,7 +1769,6 @@ btn.classList.toggle('active', btn.dataset.val === sex);
 });
 renderBodyTypes();
 }
-
 function renderBodyTypes() {
 const container = document.getElementById("bodyTypeSelection");
 container.innerHTML = bodyTypes[selectedSex].map(bt => `
@@ -1928,12 +1778,10 @@ container.innerHTML = bodyTypes[selectedSex].map(bt => `
 </div>
 `).join('');
 }
-
 function selectBodyType(id) {
 selectedBodyType = id;
 renderBodyTypes();
 }
-
 function nextOnb() {
 if (onbStep < 4) {
 document.querySelector(`.onb-step[data-step="${onbStep}"]`).classList.remove("active");
@@ -1945,7 +1793,6 @@ document.getElementById(`onbProg${i}`).style.width = i <= onbStep ? "100%" : "0%
 if (onbStep === 4) renderBodyTypes();
 }
 }
-
 function finishOnb() {
 state.profile.age = parseInt(document.getElementById("onbAge").value);
 state.profile.sex = selectedSex;
@@ -1959,7 +1806,6 @@ document.getElementById("onboarding").classList.remove("active");
 renderAll();
 showToast("✨ Benvenuto! Inizia registrando la tua prima attività", "success");
 }
-
 function updateProfileBodyTypes() {
 const sex = document.getElementById("profSex").value;
 const btSelect = document.getElementById("profBodyType");
@@ -1967,7 +1813,6 @@ btSelect.innerHTML = bodyTypes[sex].map(bt =>
 `<option value="${bt.id}" ${state.profile.bodyType === bt.id ? 'selected' : ''}>${bt.icon} ${bt.name}</option>`
 ).join('');
 }
-
 function openProfile() {
 document.getElementById("profAge").value = state.profile.age;
 document.getElementById("profSex").value = state.profile.sex;
@@ -1976,7 +1821,6 @@ document.getElementById("profHeight").value = state.profile.height;
 updateProfileBodyTypes();
 document.getElementById("profileModal").classList.add("active");
 }
-
 function saveProfile() {
 state.profile.age = parseInt(document.getElementById("profAge").value);
 state.profile.sex = document.getElementById("profSex").value;
@@ -1991,7 +1835,6 @@ closeModal("profileModal");
 renderAll();
 showToast("✓ Profilo salvato", "success");
 }
-
 function resetAll() {
 if (!confirm("Azzerare tutti i dati di oggi?\n\nQuesta azione cancellerà:\n• Tutte le attività registrate\n• Il profilo ormonale corrente\n• La checklist giornaliera\n\nIl tuo profilo personale rimarrà salvato.")) return;
 state.todayActivities = [];
@@ -2006,7 +1849,6 @@ renderAll();
 showToast("✓ Giornata azzerata con successo", "success");
 closeModal("profileModal");
 }
-
 function exportCSV() {
 const limit = getPlanLimit();
 const dataToExport = [...state.history.slice(-limit)];
@@ -2030,7 +1872,6 @@ x.download = `elite-hormone-export-${new Date().toISOString().slice(0, 10)}.csv`
 x.click();
 showToast("✓ CSV scaricato", "success");
 }
-
 const SPLIT_PRESETS = {
 2: [{ name: 'Upper/Lower', days: ['Upper Body', 'Lower Body'], icon: '💪', desc: 'Parte alta / Parte bassa' }],
 3: [
@@ -2051,7 +1892,6 @@ const SPLIT_PRESETS = {
 { name: 'Bro Split Advanced', days: ['Chest', 'Back', 'Legs', 'Shoulders', 'Arms', 'Core+Cardio'], icon: '💎', desc: '6 giorni intensi' }
 ]
 };
-
 function renderGymView() {
 const hasTemplates = state.workoutTemplates && state.workoutTemplates.length > 0;
 document.getElementById('splitSelection').style.display = hasTemplates ? 'none' : 'block';
@@ -2065,7 +1905,6 @@ renderTemplatesList();
 }
 renderWorkoutHistory();
 }
-
 function renderSplitPresets() {
 const container = document.getElementById('splitPresets');
 if (!container) return;
@@ -2080,7 +1919,6 @@ container.innerHTML = presets.map((p, idx) => `
 </div>
 `).join('');
 }
-
 function selectSplitDays(days) {
 state.currentSplitDays = days;
 saveState();
@@ -2089,7 +1927,6 @@ opt.classList.toggle('active', parseInt(opt.dataset.days) === days);
 });
 renderSplitPresets();
 }
-
 function applySplitPreset(presetIdx) {
 const preset = SPLIT_PRESETS[state.currentSplitDays][presetIdx];
 if (!preset) return;
@@ -2104,7 +1941,6 @@ saveState();
 renderGymView();
 showToast(`✓ Split "${sanitize(preset.name)}" creata! Ora personalizza le schede.`, 'success');
 }
-
 function renderTemplatesList() {
 const container = document.getElementById('templatesList');
 if (!container) return;
@@ -2131,7 +1967,6 @@ return `
 `;
 }).join('');
 }
-
 function createNewTemplate() {
 const newTemplate = {
 id: Date.now(),
@@ -2144,7 +1979,6 @@ state.workoutTemplates.push(newTemplate);
 saveState();
 editTemplate(newTemplate.id);
 }
-
 function editTemplate(templateId) {
 const template = state.workoutTemplates.find(t => t.id === templateId);
 if (!template) return;
@@ -2154,14 +1988,12 @@ document.getElementById('templatesSection').style.display = 'none';
 document.getElementById('templateEditor').style.display = 'block';
 renderTemplateExercises();
 }
-
 function closeTemplateEditor() {
 state.editingTemplateId = null;
 document.getElementById('templateEditor').style.display = 'none';
 document.getElementById('templatesSection').style.display = 'block';
 renderTemplatesList();
 }
-
 function renderTemplateExercises() {
 const container = document.getElementById('templateExercisesList');
 const template = state.workoutTemplates.find(t => t.id === state.editingTemplateId);
@@ -2194,7 +2026,6 @@ container.innerHTML = template.exercises.map((ex, idx) => `
 </div>
 `).join('');
 }
-
 function updateTemplateExercise(idx, field, value) {
 const template = state.workoutTemplates.find(t => t.id === state.editingTemplateId);
 if (!template) return;
@@ -2205,26 +2036,22 @@ ex[field] = parseInt(value) || (field === 'sets' ? 3 : 90);
 ex[field] = value;
 }
 }
-
 function removeTemplateExercise(idx) {
 const template = state.workoutTemplates.find(t => t.id === state.editingTemplateId);
 if (!template) return;
 template.exercises.splice(idx, 1);
 renderTemplateExercises();
 }
-
 function showExercisePicker() {
 document.getElementById('templateEditor').style.display = 'none';
 document.getElementById('exercisePicker').style.display = 'block';
 renderPickerTabs();
 renderPickerGrid();
 }
-
 function closeExercisePicker() {
 document.getElementById('exercisePicker').style.display = 'none';
 document.getElementById('templateEditor').style.display = 'block';
 }
-
 function renderPickerTabs() {
 const container = document.getElementById('pickerTabs');
 if (!container) return;
@@ -2240,13 +2067,11 @@ container.innerHTML = muscles.map(m => `
 <div class="gym-tab ${m.id === state.pickerMuscle ? 'active' : ''}" data-gtab="${m.id}" onclick="switchPickerTab('${m.id}')">${m.name}</div>
 `).join('');
 }
-
 function switchPickerTab(muscle) {
 state.pickerMuscle = muscle;
 renderPickerTabs();
 renderPickerGrid();
 }
-
 function renderPickerGrid() {
 const grid = document.getElementById('pickerGrid');
 if (!grid) return;
@@ -2259,7 +2084,6 @@ grid.innerHTML = exercises.map(ex => `
 </div>
 `).join('');
 }
-
 function addExerciseToTemplate(exerciseId) {
 const exercise = Object.values(GYM_EXERCISES).flat().find(e => e.id === exerciseId);
 const template = state.workoutTemplates.find(t => t.id === state.editingTemplateId);
@@ -2274,7 +2098,6 @@ closeExercisePicker();
 renderTemplateExercises();
 showToast(`✓ ${sanitize(exercise.name)} aggiunto`, 'success');
 }
-
 function saveTemplate() {
 const template = state.workoutTemplates.find(t => t.id === state.editingTemplateId);
 if (!template) return;
@@ -2288,7 +2111,6 @@ saveState();
 closeTemplateEditor();
 showToast('✓ Scheda salvata!', 'success');
 }
-
 function deleteTemplate(templateId) {
 if (!confirm('Eliminare questa scheda?')) return;
 state.workoutTemplates = state.workoutTemplates.filter(t => t.id !== templateId);
@@ -2296,7 +2118,6 @@ saveState();
 renderTemplatesList();
 showToast('🗑️ Scheda eliminata', 'success');
 }
-
 function startWorkoutFromTemplate(templateId) {
 const template = state.workoutTemplates.find(t => t.id === templateId);
 if (!template || template.exercises.length === 0) {
@@ -2327,7 +2148,6 @@ startWorkoutTimer();
 renderActiveWorkout();
 showToast(`🔥 Inizio ${sanitize(template.name)}!`, 'success');
 }
-
 function renderActiveWorkout() {
 const container = document.getElementById('exercisesList');
 if (!container || !state.activeWorkout) return;
@@ -2342,7 +2162,7 @@ ${ex.currentSets.map((set, setIndex) => `
 <div>
 <div class="set-label">Serie ${set.set}</div>
 <input type="number" class="set-input" placeholder="Reps" inputmode="numeric" pattern="[0-9]*"
-value="${set.reps}" 
+value="${set.reps}"
 onchange="updateActiveSet(${exIndex}, ${setIndex}, 'reps', this.value)"
 style="width:65px;margin-bottom:3px;">
 <div style="font-size:9px;color:var(--text3);">target: ${sanitize(ex.reps || '8-10')}</div>
@@ -2350,7 +2170,7 @@ style="width:65px;margin-bottom:3px;">
 <div>
 <div class="set-label">Kg</div>
 <input type="number" class="set-input" placeholder="0" inputmode="decimal" pattern="[0-9]*"
-value="${set.weight}" 
+value="${set.weight}"
 onchange="updateActiveSet(${exIndex}, ${setIndex}, 'weight', this.value)"
 style="width:65px;">
 </div>
@@ -2372,12 +2192,10 @@ ${set.completed ? `
 </div>
 `).join('');
 }
-
 function updateActiveSet(exIndex, setIndex, field, value) {
 if (!state.activeWorkout) return;
 state.activeWorkout.exercises[exIndex].currentSets[setIndex][field] = value;
 }
-
 function toggleActiveSetComplete(exIndex, setIndex) {
 if (!state.activeWorkout) return;
 const set = state.activeWorkout.exercises[exIndex].currentSets[setIndex];
@@ -2385,7 +2203,6 @@ set.completed = !set.completed;
 if (navigator.vibrate) navigator.vibrate(50);
 renderActiveWorkout();
 }
-
 function startRestTimer(exIndex, setIndex, seconds) {
 const timerKey = `active-${exIndex}-${setIndex}`;
 if (state.restTimers[timerKey]) clearInterval(state.restTimers[timerKey]);
@@ -2407,7 +2224,6 @@ showToast('⏰ Recupero terminato!', 'success');
 }
 }, 1000);
 }
-
 let workoutTimerInterval;
 function startWorkoutTimer() {
 const startTime = new Date(state.activeWorkout.startTime).getTime();
@@ -2421,7 +2237,6 @@ const timerEl = document.getElementById('workoutTimer');
 if (timerEl) timerEl.textContent = `${mins}:${secs}`;
 }, 1000);
 }
-
 function finishWorkout() {
 if (!state.activeWorkout) return;
 if (workoutTimerInterval) {
@@ -2445,7 +2260,6 @@ saveState();
 renderGymView();
 showToast(`✓ Workout completato! ${totalSets} serie, ${totalVolume}kg totali`, 'success');
 }
-
 function renderWorkoutHistory() {
 const container = document.getElementById('historyList');
 if (!container) return;
@@ -2466,7 +2280,6 @@ return `
 `;
 }).join('');
 }
-
 if ('serviceWorker' in navigator) {
 const swCode = `
 const CACHE = 'elitefit-v1';
@@ -2489,7 +2302,6 @@ const blob = new Blob([swCode], { type: 'application/javascript' });
 const swUrl = URL.createObjectURL(blob);
 navigator.serviceWorker.register(swUrl).catch(() => {});
 }
-
 init();
 </script>
 </body>
